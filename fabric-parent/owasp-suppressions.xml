@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!--
+    Bu dosya, şu an için düzeltilemeyen güvenlik açıklarını bastırmak için kullanılır.
+    Her bastırma için açıklama ve gerekçe ekleyiniz.
+    -->
+
+    <!-- Örnek suppression - Gerçek kullanımda bu açıklamanın güvenlik değerlendirmenizi yansıtması gerekir -->
+    <!--
+    <suppress>
+       <notes>CVE-2020-XXXXX hızlı bir şekilde düzeltilemeyecek ve düşük riskli</notes>
+       <cve>CVE-2020-XXXXX</cve>
+    </suppress>
+    -->
+</suppressions>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/java-services/address-service/address-service.iml" filepath="$PROJECT_DIR$/java-services/address-service/address-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/auth-service/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/base-person-service/base-person-service.iml" filepath="$PROJECT_DIR$/java-services/base-person-service/base-person-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/company-service/company-service.iml" filepath="$PROJECT_DIR$/java-services/company-service/company-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/contact-service/contact-service.iml" filepath="$PROJECT_DIR$/java-services/contact-service/contact-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/email-service/email-service.iml" filepath="$PROJECT_DIR$/java-services/email-service/email-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/employee-service/employee-service.iml" filepath="$PROJECT_DIR$/java-services/employee-service/employee-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/fabric-java-commons/fabric-java-commons.iml" filepath="$PROJECT_DIR$/libraries/fabric-java-commons/fabric-java-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/fabric-java-security/fabric-java-security.iml" filepath="$PROJECT_DIR$/libraries/fabric-java-security/fabric-java-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/fabric-management.iml" filepath="$PROJECT_DIR$/.idea/fabric-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fabric-parent/fabric-parent.iml" filepath="$PROJECT_DIR$/fabric-parent/fabric-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/java-services/finance-service/finance-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/mail-service/mail-service.iml" filepath="$PROJECT_DIR$/java-services/mail-service/mail-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/performance-service/performance-service.iml" filepath="$PROJECT_DIR$/java-services/performance-service/performance-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/phone-service/phone-service.iml" filepath="$PROJECT_DIR$/java-services/phone-service/phone-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-services/user-service/user-service.iml" filepath="$PROJECT_DIR$/java-services/user-service/user-service.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config
+  namespace: fabric
+data:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+      tcp {
+        port => 5000
+        codec => json
+      }
+    }
+
+    filter {
+      if [kubernetes] {
+        mutate {
+          add_field => { "[@metadata][target_index]" => "logstash-k8s-%{+YYYY.MM.dd}"
