@@ -1,0 +1,16 @@
+{
+  "zipkin": {
+    "collector": {
+      "http": {
+        "port": 9411
+      }
+    },
+    "storage": {
+      "type": "elasticsearch",
+      "elasticsearch": {
+        "hosts": "http://elasticsearch:9200",
+        "index": "zipkin"
+      }
+    }
+  }
+}
