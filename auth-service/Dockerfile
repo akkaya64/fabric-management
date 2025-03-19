@@ -1,20 +1,21 @@
-FROM eclipse-temurin:17-jdk as builder
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
-COPY src ./src
-RUN ./mvnw package -DskipTests
 
+# Projeyi kopyala
+COPY pom.xml .
+COPY src ./src
+
+# Maven ile build et
+RUN apt-get update && apt-get install -y maven
+RUN mvn package -DskipTests
+
+# Runtime image
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=0 /app/target/*.jar app.jar
 
-# Add Spring profiles
-ARG SPRING_PROFILES_ACTIVE=dev
-ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+ENV SPRING_PROFILES_ACTIVE=dev
 
-# Health check for Kubernetes
 HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:8080/actuator/health || exit 1
 
 EXPOSE 8080
