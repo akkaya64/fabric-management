@@ -1,0 +1,8 @@
+# JVM bellek ayarları
+-Xms256m
+-Xmx256m
+
+# GC ayarları
+-XX:+UseG1GC
+-XX:G1ReservePercent=25
+-XX:InitiatingHeapOccupancyPercent=30

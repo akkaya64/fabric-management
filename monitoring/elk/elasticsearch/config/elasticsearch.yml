@@ -1,0 +1,10 @@
+cluster.name: "fabric-docker-cluster"
+network.host: 0.0.0.0
+discovery.type: single-node
+
+# X-Pack ayarları (ücretsiz temel güvenlik)
+xpack.security.enabled: false
+xpack.monitoring.collection.enabled: true
+
+# Bellek kullanımı sınırlandırması (geliştirme ortamı için)
+bootstrap.memory_lock: true
