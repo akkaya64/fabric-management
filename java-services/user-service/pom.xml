@@ -17,10 +17,6 @@
 	<name>user-service</name>
 	<description>user-service for fabric management</description>
 
-	<!-- Removed empty metadata sections or populate with actual values if needed -->
-
-	<!-- Removed properties section as these are now inherited from fabric-parent -->
-
 	<dependencies>
 		<!-- Spring Boot Core Dependencies -->
 		<dependency>
@@ -130,16 +126,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- Added Internal Dependencies -->
-		<dependency>
-			<groupId>com.fabric</groupId>
-			<artifactId>fabric-java-commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fabric</groupId>
-			<artifactId>fabric-java-security</artifactId>
 		</dependency>
 
 		<!-- Added API Documentation -->

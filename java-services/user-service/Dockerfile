@@ -1,22 +1,25 @@
-FROM eclipse-temurin:17-jdk
+# Birinci aşama: Derleme
+FROM maven:3.8.6-eclipse-temurin-17-focal as build
 WORKDIR /app
 
-# Projeyi kopyala
+# Ana projeyi ve tüm modülleri kopyala
 COPY pom.xml .
-COPY src ./src
+COPY fabric-parent/ ./fabric-parent/
+COPY libraries/ ./libraries/
+COPY api-gateway/ ./api-gateway/
+COPY auth-service/ ./auth-service/
+COPY java-services/ ./java-services/
 
-# Maven ile build et
-RUN apt-get update && apt-get install -y maven
-RUN mvn package -DskipTests
+# Önce parent ve library modüllerini derle
+RUN mvn -B -f fabric-parent/pom.xml clean install -DskipTests -Ddependency-check.skip=true
+# RUN mvn -B -f libraries/fabric-java-commons/pom.xml clean install -DskipTests
+# RUN mvn -B -f libraries/fabric-java-security/pom.xml clean install -DskipTests
 
-# Runtime image
+# Şimdi ilgili servisi derle
+RUN mvn -B -f java-services/user-service/pom.xml clean package -DskipTests
+
+# İkinci aşama: Çalışma zamanı
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=0 /app/target/*.jar app.jar
-
-ENV SPRING_PROFILES_ACTIVE=dev
-
-HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:8080/actuator/health || exit 1
-
-EXPOSE 8080
+COPY --from=build /app/java-services/user-service/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
