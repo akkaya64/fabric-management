@@ -135,7 +135,7 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash:7.17.0
     ports:
-      - "5000:5000"
+      - "5001:5000"  # 5000 portunu 5001'e değiştirdim (host:container)
       - "5044:5044"
       - "9600:9600"
     environment:
@@ -210,7 +210,7 @@ services:
   # Application services
   api-gateway:
     build:
-      context: .
+      context: .  # Kök dizin
       dockerfile: api-gateway/Dockerfile
       args:
         SPRING_PROFILES_ACTIVE: dev
@@ -227,7 +227,7 @@ services:
       - LOGGING_PATTERN_CONSOLE=%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n
       - LOGGING_LOGSTASH_ENABLED=true
       - LOGGING_LOGSTASH_HOST=logstash
-      - LOGGING_LOGSTASH_PORT=5000
+      - LOGGING_LOGSTASH_PORT=5000  # Bu port konteyner içindeki port (değiştirmeye gerek yok)
       - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info,prometheus
       - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
       - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=true
@@ -245,7 +245,7 @@ services:
     networks:
       - fabric-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -253,7 +253,7 @@ services:
 
   auth-service:
     build:
-      context: .
+      context: .  # Kök dizin
       dockerfile: auth-service/Dockerfile
       args:
         SPRING_PROFILES_ACTIVE: dev
@@ -268,25 +268,25 @@ services:
       - LOGGING_PATTERN_CONSOLE=%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n
       - LOGGING_LOGSTASH_ENABLED=true
       - LOGGING_LOGSTASH_HOST=logstash
-      - LOGGING_LOGSTASH_PORT=5000
+      - LOGGING_LOGSTASH_PORT=5000  # Bu port konteyner içindeki port (değiştirmeye gerek yok)
       - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info,prometheus
       - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
       - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=true
       - MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED=true
       - MANAGEMENT_HEALTH_READINESSSTATE_ENABLED=true
     depends_on:
-      postgres:
-        condition: service_healthy
       consul:
         condition: service_healthy
       zipkin:
+        condition: service_healthy
+      postgres:
         condition: service_healthy
       logstash:
         condition: service_healthy
     networks:
       - fabric-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -294,7 +294,7 @@ services:
 
   user-service:
     build:
-      context: .
+      context: .  # Kök dizin
       dockerfile: java-services/user-service/Dockerfile
       args:
         SPRING_PROFILES_ACTIVE: dev
@@ -310,27 +310,25 @@ services:
       - LOGGING_PATTERN_CONSOLE=%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n
       - LOGGING_LOGSTASH_ENABLED=true
       - LOGGING_LOGSTASH_HOST=logstash
-      - LOGGING_LOGSTASH_PORT=5000
+      - LOGGING_LOGSTASH_PORT=5000  # Bu port konteyner içindeki port (değiştirmeye gerek yok)
       - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info,prometheus
       - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
       - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=true
       - MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED=true
       - MANAGEMENT_HEALTH_READINESSSTATE_ENABLED=true
     depends_on:
-      postgres:
-        condition: service_healthy
       consul:
         condition: service_healthy
       zipkin:
         condition: service_healthy
-      kafka:
+      postgres:
         condition: service_healthy
       logstash:
         condition: service_healthy
     networks:
       - fabric-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 30s
       timeout: 10s
       retries: 3

@@ -171,7 +171,7 @@
                     <configuration>
                         <failBuildOnCVSS>7</failBuildOnCVSS>
                         <suppressionFiles>
-                            <suppressionFile>owasp-suppression's.xml</suppressionFile>
+                            <suppressionFile>owasp-suppressions.xml</suppressionFile>
                         </suppressionFiles>
                     </configuration>
                     <executions>

@@ -22,5 +22,8 @@
       </list>
     </option>
   </component>
+  <component name="ProjectResources">
+    <resource url="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd" location="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK" />
 </project>
