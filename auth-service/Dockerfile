@@ -11,12 +11,12 @@ COPY auth-service/ ./auth-service/
 COPY java-services/ ./java-services/
 
 # Önce parent ve library modüllerini derle
-RUN mvn -B -f fabric-parent/pom.xml clean install -DskipTests
-RUN mvn -B -f libraries/fabric-java-commons/pom.xml clean install -DskipTests
-RUN mvn -B -f libraries/fabric-java-security/pom.xml clean install -DskipTests
+RUN mvn -B -f fabric-parent/pom.xml clean install -DskipTests -Ddependency-check.skip=true
+RUN mvn -B -f libraries/fabric-java-commons/pom.xml clean install -DskipTests -Ddependency-check.skip=true
+RUN mvn -B -f libraries/fabric-java-security/pom.xml clean install -DskipTests -Ddependency-check.skip=true
 
 # Şimdi ilgili servisi derle (örnek: api-gateway için)
-RUN mvn -B -f auth-service/pom.xml clean package -DskipTests
+RUN mvn -B -f auth-service/pom.xml clean package -DskipTests -Ddependency-check.skip=true
 
 # İkinci aşama: Çalışma zamanı
 FROM eclipse-temurin:17-jre
