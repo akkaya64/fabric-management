@@ -25,8 +25,8 @@
         <module name="auth-service" />
         <module name="email-service" />
         <module name="api-gateway" />
-        <module name="performance-service" />
         <module name="phone-service" />
+        <module name="performance-service" />
         <module name="fabric-java-security" />
         <module name="mail-service" />
       </profile>

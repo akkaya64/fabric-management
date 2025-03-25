@@ -19,8 +19,8 @@
 
     <modules>
         <module>fabric-parent</module>
-        <module>libraries/fabric-java-commons</module>
-        <module>libraries/fabric-java-security</module>
+        <module>./libraries/fabric-java-commons</module>
+        <module>./libraries/fabric-java-security</module>
         <module>api-gateway</module>
         <module>auth-service</module>
         <module>java-services/user-service</module>
