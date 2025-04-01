@@ -21,9 +21,9 @@
         <module>fabric-parent</module>
         <module>./libraries/fabric-java-commons</module>
         <module>./libraries/fabric-java-security</module>
-        <module>api-gateway</module>
-        <module>identity/auth-service</module>
-        <module>identity/user-service</module>
+        <module>infrastructure/api-gateway</module>
+        <module>domains/identity/auth-service</module>
+        <module>domains/identity/user-service</module>
         <module>domains/contact/address-service</module>
         <module>domains/contact/contact-service</module>
         <module>domains/contact/email-service</module>
