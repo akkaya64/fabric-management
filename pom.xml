@@ -22,18 +22,16 @@
         <module>./libraries/fabric-java-commons</module>
         <module>./libraries/fabric-java-security</module>
         <module>api-gateway</module>
-        <module>auth-service</module>
-        <module>java-services/user-service</module>
-        <module>java-services/address-service</module>
-        <module>java-services/base-person-service</module>
-        <module>java-services/company-service</module>
-        <module>java-services/contact-service</module>
-        <module>java-services/email-service</module>
-        <module>java-services/employee-service</module>
-        <module>java-services/finance-service</module>
-        <module>java-services/mail-service</module>
-        <module>java-services/performance-service</module>
-        <module>java-services/phone-service</module>
+        <module>identity/auth-service</module>
+        <module>identity/user-service</module>
+        <module>domains/contact/address-service</module>
+        <module>domains/contact/contact-service</module>
+        <module>domains/contact/email-service</module>
+        <module>domains/contact/phone-service</module>
+        <module>domains/organization/employee-service</module>
+        <module>domains/organization/base-person-service</module>
+        <module>domains/organization/company-service</module>
+        <module>domains/organization/finance-service</module>
     </modules>
 
     <build>
