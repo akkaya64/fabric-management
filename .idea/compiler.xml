@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for Fabric Management" enabled="true">
+      <profile name="Annotation profile for fabric-java-commons" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -19,8 +19,8 @@
         <module name="company-service" />
         <module name="user-service" />
         <module name="base-person-service" />
-        <module name="employee-service" />
         <module name="fabric-java-commons" />
+        <module name="employee-service" />
         <module name="contact-service" />
         <module name="auth-service" />
         <module name="email-service" />
