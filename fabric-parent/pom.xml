@@ -21,7 +21,7 @@
 
     <!-- Burada modülleri belirtiyoruz -->
     <modules>
-        <module>../api-gateway</module>
+        <module>../infrastructure/api-gateway</module>
         <module>../libraries/fabric-java-commons</module>
         <module>../libraries/fabric-java-security</module>
     </modules>
