@@ -27,10 +27,10 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: ./mvnw clean verify
+        run: mvn clean verify    # Maven Wrapper yerine doğrudan mvn kullan
 
       - name: Run Tests
-        run: ./mvnw test
+        run: mvn test           # Maven Wrapper yerine doğrudan mvn kullan
 
   docker-build:
     needs: build
@@ -53,14 +53,14 @@ jobs:
       - name: Build and push API Gateway
         uses: docker/build-push-action@v4
         with:
-          context: ./api-gateway
+          context: ./infrastructure/api-gateway  # Güncellenen yol
           push: true
           tags: ${{ env.REGISTRY }}/fabric/api-gateway:${{ env.VERSION }},${{ env.REGISTRY }}/fabric/api-gateway:latest
 
       - name: Build and push Auth Service
         uses: docker/build-push-action@v4
         with:
-          context: ./auth-service
+          context: ./domains/identity/auth-service  # Güncellenen yol
           push: true
           tags: ${{ env.REGISTRY }}/fabric/auth-service:${{ env.VERSION }},${{ env.REGISTRY }}/fabric/auth-service:latest
 
@@ -85,11 +85,11 @@ jobs:
       - name: Deploy to development
         run: |
           # Kubernetes manifestlerinde imaj versiyonlarını güncelle
-          find kubernetes/deployments -type f -name "*.yaml" -exec sed -i "s|\${REGISTRY}|${{ env.REGISTRY }}|g" {} \;
-          find kubernetes/deployments -type f -name "*.yaml" -exec sed -i "s|\${VERSION}|${{ env.VERSION }}|g" {} \;
+          find infrastructure/kubernetes/deployments -type f -name "*.yaml" -exec sed -i "s|\${REGISTRY}|${{ env.REGISTRY }}|g" {} \;
+          find infrastructure/kubernetes/deployments -type f -name "*.yaml" -exec sed -i "s|\${VERSION}|${{ env.VERSION }}|g" {} \;
           
           # Kubernetes manifestlerini uygula
-          kubectl apply -f kubernetes/config-maps/
-          kubectl apply -f kubernetes/secrets/
-          kubectl apply -f kubernetes/deployments/
-          kubectl apply -f kubernetes/ingress/
+          kubectl apply -f infrastructure/kubernetes/config-maps/
+          kubectl apply -f infrastructure/kubernetes/secrets/
+          kubectl apply -f infrastructure/kubernetes/deployments/
+          kubectl apply -f infrastructure/kubernetes/ingress/
