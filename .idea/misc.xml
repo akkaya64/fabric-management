@@ -7,7 +7,6 @@
         <option value="$PROJECT_DIR$/libraries/fabric-java-security/pom.xml" />
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/auth-service/pom.xml" />
-        <option value="$PROJECT_DIR$/java-services/mail-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/user-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/email-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/phone-service/pom.xml" />
@@ -17,9 +16,15 @@
         <option value="$PROJECT_DIR$/java-services/finance-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/employee-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/base-person-service/pom.xml" />
-        <option value="$PROJECT_DIR$/java-services/performance-service/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/domains/contact/email-service/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/java-services/mail-service/pom.xml" />
+        <option value="$PROJECT_DIR$/java-services/performance-service/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectResources">

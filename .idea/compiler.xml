@@ -16,19 +16,16 @@
         </processorPath>
         <module name="address-service" />
         <module name="finance-service" />
-        <module name="company-service" />
         <module name="user-service" />
+        <module name="company-service" />
         <module name="base-person-service" />
         <module name="fabric-java-commons" />
         <module name="employee-service" />
         <module name="contact-service" />
         <module name="auth-service" />
         <module name="email-service" />
-        <module name="api-gateway" />
         <module name="phone-service" />
-        <module name="performance-service" />
         <module name="fabric-java-security" />
-        <module name="mail-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
