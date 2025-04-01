@@ -19,13 +19,6 @@
     <name>Fabric Management Parent</name>
     <description>Parent POM for Fabric Management Microservices</description>
 
-    <!-- Burada modülleri belirtiyoruz -->
-    <modules>
-        <module>../infrastructure/api-gateway</module>
-        <module>../libraries/fabric-java-commons</module>
-        <module>../libraries/fabric-java-security</module>
-    </modules>
-
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
