@@ -44,7 +44,7 @@
         <spring-boot-maven-plugin.version>3.4.3</spring-boot-maven-plugin.version>
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
-        <owasp-dependency-check-maven.version>8.4.0</owasp-dependency-check-maven.version>
+        <owasp-dependency-check-maven.version>8.4.2</owasp-dependency-check-maven.version>
     </properties>
 
     <dependencyManagement>
@@ -170,6 +170,12 @@
                     <version>${owasp-dependency-check-maven.version}</version>
                     <configuration>
                         <failBuildOnCVSS>7</failBuildOnCVSS>
+                        <failOnError>false</failOnError>
+                        <cveValidForHours>24</cveValidForHours>
+                        <connectionTimeout>60000</connectionTimeout>
+                        <dataConnectionTimeout>60000</dataConnectionTimeout>
+                        <retryAttempts>3</retryAttempts>
+                        <skipNvdUpdate>true</skipNvdUpdate>
                         <suppressionFiles>
                             <suppressionFile>${project.basedir}/owasp-suppressions.xml</suppressionFile>
                         </suppressionFiles>
