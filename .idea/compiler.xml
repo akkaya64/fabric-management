@@ -14,6 +14,7 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
+        <module name="contactMessage-service" />
         <module name="address-service" />
         <module name="finance-service" />
         <module name="user-service" />
@@ -21,7 +22,6 @@
         <module name="base-person-service" />
         <module name="fabric-java-commons" />
         <module name="employee-service" />
-        <module name="contact-service" />
         <module name="auth-service" />
         <module name="email-service" />
         <module name="phone-service" />
@@ -35,7 +35,7 @@
       <module name="auth-service" target="17" />
       <module name="base-person-service" target="17" />
       <module name="company-service" target="17" />
-      <module name="contact-service" target="17" />
+      <module name="contactMessage-service" target="17" />
       <module name="email-service" target="17" />
       <module name="employee-service" target="17" />
       <module name="fabric-java-commons" target="17" />
@@ -56,7 +56,7 @@
       <module name="auth-service" options="-parameters" />
       <module name="base-person-service" options="-parameters" />
       <module name="company-service" options="-parameters" />
-      <module name="contact-service" options="-parameters" />
+      <module name="contactMessage-service" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="fabric-java-commons" options="-parameters" />

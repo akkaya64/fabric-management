@@ -7,7 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/domains/identity/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/domains/identity/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/organization/base-person-service/base-person-service.iml" filepath="$PROJECT_DIR$/domains/organization/base-person-service/base-person-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/organization/company-service/company-service.iml" filepath="$PROJECT_DIR$/domains/organization/company-service/company-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/domains/contact/contact-service/contact-service.iml" filepath="$PROJECT_DIR$/domains/contact/contact-service/contact-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domains/contact/contact-service/contactMessage-service.iml" filepath="$PROJECT_DIR$/domains/contact/contact-service/contactMessage-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/contact/email-service/email-service.iml" filepath="$PROJECT_DIR$/domains/contact/email-service/email-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/organization/employee-service/employee-service.iml" filepath="$PROJECT_DIR$/domains/organization/employee-service/employee-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/fabric-java-commons/fabric-java-commons.iml" filepath="$PROJECT_DIR$/libraries/fabric-java-commons/fabric-java-commons.iml" />
