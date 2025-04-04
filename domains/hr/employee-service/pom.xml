@@ -8,10 +8,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../../../fabric-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>finance-service</artifactId>
+	<artifactId>employee-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>finance-service</name>
-	<description>finance-service for fabric management</description>
+	<name>employee-service</name>
+	<description>employee-service for fabric management</description>
 
 	<dependencies>
 		<!-- Spring Boot Core Dependencies -->
@@ -141,9 +141,12 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 		</dependency>
-	</dependencies>
-
-	<!-- Spring Cloud dependency management is already defined in parent POM -->
+        <!-- H2 Database (Development) --> 
+        <dependency> 
+            <groupId>com.h2database</groupId> 
+            <artifactId>h2</artifactId> 
+            <scope>runtime</scope> 
+        </dependency>	</dependencies>
 
 	<build>
 		<plugins>
@@ -172,4 +175,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
