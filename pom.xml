@@ -24,14 +24,10 @@
         <module>infrastructure/api-gateway</module>
         <module>domains/identity/auth-service</module>
         <module>domains/identity/user-service</module>
-        <module>domains/contact/address-service</module>
-        <module>domains/contact/contact-service</module>
-        <module>domains/contact/email-service</module>
-        <module>domains/contact/phone-service</module>
-        <module>domains/organization/employee-service</module>
-        <module>domains/organization/base-person-service</module>
+        <module>domains/hr/employee-service</module>
+        <module>domains/hr/base-person-service</module>
         <module>domains/organization/company-service</module>
-        <module>domains/organization/finance-service</module>
+        <module>domains/finance/finance-service</module>
     </modules>
 
     <build>

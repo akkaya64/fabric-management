@@ -17,11 +17,15 @@
         <option value="$PROJECT_DIR$/java-services/employee-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/base-person-service/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/domains/contact/email-service/pom.xml" />
+        <option value="$PROJECT_DIR$/domains/hr/base-person-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/domains/contact/contact-service/pom.xml" />
+        <option value="$PROJECT_DIR$/domains/contact/contactMessage-service/pom.xml" />
+        <option value="$PROJECT_DIR$/domains/contact/email-service/pom.xml" />
+        <option value="$PROJECT_DIR$/domains/contact/phone-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/mail-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/performance-service/pom.xml" />
       </set>
