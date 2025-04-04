@@ -139,6 +139,13 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 		</dependency>
+
+		<!-- H2 Database (Development) -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<!-- Spring Cloud dependencyManagement zaten parent POM'da tanımlı olduğundan kaldırıldı -->

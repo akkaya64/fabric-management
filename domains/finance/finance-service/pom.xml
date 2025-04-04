@@ -8,10 +8,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../../../fabric-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>base-person-service</artifactId>
+	<artifactId>finance-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>base-person-service</name>
-	<description>base-person-service for fabric management</description>
+	<name>finance-service</name>
+	<description>finance-service for fabric management</description>
 
 	<dependencies>
 		<!-- Spring Boot Core Dependencies -->
@@ -136,12 +136,19 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
-		<!-- API Documentation - Eklendi -->
+		<!-- API Documentation -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 		</dependency>
-	</dependencies>
+        <!-- H2 Database (Development) --> 
+        <dependency> 
+            <groupId>com.h2database</groupId> 
+            <artifactId>h2</artifactId> 
+            <scope>runtime</scope> 
+        </dependency>	</dependencies>
+
+	<!-- Spring Cloud dependency management is already defined in parent POM -->
 
 	<build>
 		<plugins>
@@ -170,5 +177,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

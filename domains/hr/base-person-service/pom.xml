@@ -8,10 +8,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../../../fabric-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>employee-service</artifactId>
+	<artifactId>base-person-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-service</name>
-	<description>employee-service for fabric management</description>
+	<name>base-person-service</name>
+	<description>base-person-service for fabric management</description>
 
 	<dependencies>
 		<!-- Spring Boot Core Dependencies -->
@@ -136,12 +136,17 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
-		<!-- API Documentation -->
+		<!-- API Documentation - Eklendi -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 		</dependency>
-	</dependencies>
+        <!-- H2 Database (Development) --> 
+        <dependency> 
+            <groupId>com.h2database</groupId> 
+            <artifactId>h2</artifactId> 
+            <scope>runtime</scope> 
+        </dependency>	</dependencies>
 
 	<build>
 		<plugins>

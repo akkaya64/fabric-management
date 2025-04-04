@@ -141,7 +141,12 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <!-- H2 Database (Development) --> 
+        <dependency> 
+            <groupId>com.h2database</groupId> 
+            <artifactId>h2</artifactId> 
+            <scope>runtime</scope> 
+        </dependency>	</dependencies>
 
 	<build>
 		<plugins>
