@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/domains/contact/address-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domains/contact/contact-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domains/contact/contactMessage-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domains/contact/email-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domains/contact/phone-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domains/finance/finance-service/src/main/java" charset="UTF-8" />
