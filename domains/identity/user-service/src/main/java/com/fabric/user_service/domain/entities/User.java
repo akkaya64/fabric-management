@@ -52,9 +52,8 @@ public class User extends BaseEntity{
     @Column
     private String timezone;
 
-    // Kullanıcı rollerini tutuyoruz
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<UserRole> userRoles = new HashSet<>();
+    private final Set<UserRole> userRoles = new HashSet<>();
 
     @Column
     private LocalDateTime lastPasswordChangeAt;
