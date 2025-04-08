@@ -1,4 +1,4 @@
-package com.fabric.user_service.domain.entity;
+package com.fabric.user_service.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
