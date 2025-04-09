@@ -2,32 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<!-- Parent POM referansı - Commons kütüphanesi için uygun -->
 	<parent>
 		<groupId>com.fabric</groupId>
 		<artifactId>fabric-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../../fabric-parent</relativePath>
+		<relativePath>../../../fabric-parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>fabric-java-commons</artifactId>
+	<artifactId>fabric-java-security</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>fabric-java-commons</name>
-	<description>Common utilities and components for Fabric Management microservices</description>
-
-	<!-- Commons kütüphaneleri genellikle JAR olarak paketlenir, varsayılan değer JAR olduğu için belirtmeye gerek yok -->
-	<!-- <packaging>jar</packaging> -->
+	<name>Fabric Java Security</name>
+	<description>Common security library for Fabric Management microservices</description>
 
 	<dependencies>
-		<!-- Spring Boot Core Dependencies -->
+		<!-- Spring Security Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,42 +37,30 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Utilities -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-			<version>4.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.15.1</version>
-		</dependency>
-
-		<!-- Development Tools -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
+		<!-- Utils -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
 
-		<!-- JSON Processing -->
+		<!-- JWT Support -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Testing -->
@@ -95,36 +78,34 @@
 
 	<build>
 		<plugins>
-			<!-- Maven Compiler Plugin - Parent POM'dan miras alınarak kullanılıyor -->
+
+			<!-- Maven Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 
-			<!-- Spring Boot Maven Plugin - Commons kütüphanesi için özel yapılandırma -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-					<!-- Kütüphane modülleri için çalıştırılabilir JAR oluşturmayı devre dışı bırakma -->
-					<skip>true</skip>
-					<classifier>exec</classifier>
-				</configuration>
-			</plugin>
-
-			<!-- Maven Source Plugin - Kaynakları JAR olarak paketler -->
+			<!-- Source ve JavaDoc JAR'ları oluşturmak için -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.6.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
