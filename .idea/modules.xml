@@ -8,8 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/domains/organization/company-service/company-service.iml" filepath="$PROJECT_DIR$/domains/organization/company-service/company-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/contact/contact-service/contactMessage-service.iml" filepath="$PROJECT_DIR$/services/contact/contact-service/contactMessage-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/hr/employee-service/employee-service.iml" filepath="$PROJECT_DIR$/domains/hr/employee-service/employee-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/fabric-java-commons/fabric-java-commons.iml" filepath="$PROJECT_DIR$/libraries/fabric-java-commons/fabric-java-commons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/fabric-java-security/fabric-java-security.iml" filepath="$PROJECT_DIR$/libraries/fabric-java-security/fabric-java-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/fabric-management.iml" filepath="$PROJECT_DIR$/.idea/fabric-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/fabric-parent/fabric-parent.iml" filepath="$PROJECT_DIR$/fabric-parent/fabric-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/finance/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/domains/finance/finance-service/finance-service.iml" />
