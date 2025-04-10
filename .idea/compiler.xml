@@ -15,15 +15,13 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="contactMessage-service" />
+        <module name="auth-service" />
         <module name="finance-service" />
+        <module name="api-gateway" />
         <module name="company-service" />
         <module name="user-service" />
         <module name="base-person-service" />
-        <module name="fabric-java-commons" />
         <module name="employee-service" />
-        <module name="auth-service" />
-        <module name="api-gateway" />
-        <module name="fabric-java-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
