@@ -14,14 +14,21 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="contactMessage-service" />
-        <module name="auth-service" />
-        <module name="finance-service" />
-        <module name="api-gateway" />
         <module name="company-service" />
         <module name="user-service" />
+        <module name="finance-service" />
         <module name="base-person-service" />
         <module name="employee-service" />
+      </profile>
+      <profile name="Annotation profile for auth-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="auth-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

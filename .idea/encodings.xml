@@ -16,6 +16,7 @@
     <file url="file://$PROJECT_DIR$/services/hr/base-person-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/hr/employee-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/identity/auth-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/identity/auth-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/identity/user-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/organization/company-service/src/main/java" charset="UTF-8" />
   </component>
