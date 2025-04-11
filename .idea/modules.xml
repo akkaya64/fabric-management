@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/infrastructure/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/infrastructure/api-gateway/api-gateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/domains/identity/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/domains/identity/auth-service/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" filepath="$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/organization/company-service/company-service.iml" filepath="$PROJECT_DIR$/domains/organization/company-service/company-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/services/contact/contact-service/contactMessage-service.iml" filepath="$PROJECT_DIR$/services/contact/contact-service/contactMessage-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/hr/employee-service/employee-service.iml" filepath="$PROJECT_DIR$/domains/hr/employee-service/employee-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/fabric-management.iml" filepath="$PROJECT_DIR$/.idea/fabric-management.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fabric-parent/fabric-parent.iml" filepath="$PROJECT_DIR$/fabric-parent/fabric-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fabric-management.iml" filepath="$PROJECT_DIR$/fabric-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/finance/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/domains/finance/finance-service/finance-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/identity/user-service/user-service.iml" filepath="$PROJECT_DIR$/domains/identity/user-service/user-service.iml" />
     </modules>
