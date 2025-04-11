@@ -19,15 +19,13 @@
 
     <modules>
         <module>fabric-parent</module>
-        <module>./libraries/fabric-java-commons</module>
-        <module>./libraries/fabric-java-security</module>
-        <module>infrastructure/api-gateway</module>
+<!--        <module>infrastructure/api-gateway</module>
         <module>domains/identity/auth-service</module>
         <module>domains/identity/user-service</module>
         <module>domains/hr/employee-service</module>
         <module>domains/hr/base-person-service</module>
         <module>domains/organization/company-service</module>
-        <module>domains/finance/finance-service</module>
+        <module>domains/finance/finance-service</module>-->
     </modules>
 
     <build>
