@@ -19,6 +19,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/domains/hr/base-person-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/identity/auth-service/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/java/fabric-java-security/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -37,5 +38,5 @@
   <component name="ProjectResources">
     <resource url="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd" location="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK" />
 </project>
