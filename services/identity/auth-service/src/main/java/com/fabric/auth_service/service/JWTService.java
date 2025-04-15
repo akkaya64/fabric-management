@@ -1,6 +1,5 @@
 package com.fabric.auth_service.service;
 
-import com.fabric.auth_service.security.RSAKeyProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -9,7 +8,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import com.fabric.auth_service.security.RSAKeyProvider;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -29,7 +29,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class JWTService {
     private static final Logger logger = LoggerFactory.getLogger(JWTService.class);
 
@@ -43,6 +42,10 @@ public class JWTService {
 
     @Value("${jwt.issuer:fabric-auth-service}")
     private String issuer;
+
+    public JWTService(RSAKeyProvider rsaKeyProvider) {
+        this.rsaKeyProvider = rsaKeyProvider;
+    }
 
     public String generateAccessToken(Authentication authentication) {
         return generateAccessToken(authentication.getName(), extractAuthorities(authentication));
