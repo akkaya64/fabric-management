@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fabric.auth_service.client.UserServiceClient;
 import com.fabric.auth_service.payload.request.CreateUserRequest;
 import com.fabric.auth_service.payload.response.UserResponse;
-import com.fabric.auth_service.service.JWTService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.Serial;

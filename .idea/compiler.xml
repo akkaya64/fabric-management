@@ -7,6 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="fabric-java-security" />
+        <module name="auth-service" />
+        <module name="user-service" />
       </profile>
       <profile name="Annotation profile for Fabric Management" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -15,30 +19,10 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="company-service" />
-        <module name="user-service" />
         <module name="finance-service" />
+        <module name="company-service" />
         <module name="base-person-service" />
         <module name="employee-service" />
-      </profile>
-      <profile name="Annotation profile for auth-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="auth-service" />
-      </profile>
-      <profile name="Annotation profile for fabric-java-security" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-        </processorPath>
-        <module name="fabric-java-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -64,7 +48,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
-      <module name="auth-service" options="-parameters -parameters" />
+      <module name="auth-service" options="-parameters" />
       <module name="base-person-service" options="-parameters" />
       <module name="company-service" options="-parameters" />
       <module name="contact-service" options="-parameters" />

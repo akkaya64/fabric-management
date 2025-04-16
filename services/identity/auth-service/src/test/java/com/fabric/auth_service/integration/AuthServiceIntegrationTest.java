@@ -26,7 +26,6 @@ import com.fabric.auth_service.payload.request.LoginRequest;
 import com.fabric.auth_service.payload.response.JwtResponse;
 import com.fabric.auth_service.payload.response.UserResponse;
 import com.fabric.auth_service.service.AuthService;
-import com.fabric.auth_service.service.JWTService;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

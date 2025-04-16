@@ -1,17 +1,10 @@
 package com.fabric.auth_service.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.fabric.auth_service.payload.request.CreateUserRequest;
-import com.fabric.auth_service.payload.request.LoginRequest;
-import com.fabric.auth_service.payload.request.RefreshTokenRequest;
-import com.fabric.auth_service.payload.response.JwtResponse;
-import com.fabric.auth_service.payload.response.UserResponse;
+import com.fabric.auth_service.payload.*;
 import com.fabric.auth_service.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
@@ -21,25 +14,32 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @Autowired
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        JwtResponse jwtResponse = authService.login(loginRequest);
-        return ResponseEntity.ok(jwtResponse);
+    public ResponseEntity<JwtAuthResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        JwtAuthResponse jwtAuthResponse = authService.authenticateUser(loginRequest);
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@Valid @RequestBody CreateUserRequest request) {
-        UserResponse userResponse = authService.register(request);
-        return ResponseEntity.ok(userResponse);
+    @PostMapping("/send-verification/{userId}")
+    public ResponseEntity<ApiResponse> sendVerification(@PathVariable String userId) {
+        authService.sendUserVerification(userId);
+        return ResponseEntity.ok(new ApiResponse(true, "Verification code sent successfully"));
+    }
+
+    @PostMapping("/verify-setup-password")
+    public ResponseEntity<JwtAuthResponse> verifyAndSetupPassword(@Valid @RequestBody PasswordSetupRequest request) {
+        JwtAuthResponse jwtAuthResponse = authService.verifyAndSetupPassword(request);
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<JwtResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
-        JwtResponse jwtResponse = authService.refreshToken(request);
-        return ResponseEntity.ok(jwtResponse);
+    public ResponseEntity<JwtAuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        JwtAuthResponse jwtAuthResponse = authService.refreshToken(refreshTokenRequest);
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 }

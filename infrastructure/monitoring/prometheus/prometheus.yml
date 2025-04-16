@@ -2,8 +2,46 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
 
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+rule_files:
+# - "first_rules.yml"
+# - "second_rules.yml"
+
 scrape_configs:
-  - job_name: 'spring-boot-apps'
-    metrics_path: '/actuator/prometheus'
+  - job_name: "prometheus"
     static_configs:
-      - targets: ['api-gateway:8080', 'auth-service:8080', 'user-service:8080']
+      - targets: ["localhost:9090"]
+
+  - job_name: "consul"
+    consul_sd_configs:
+      - server: "consul:8500"
+        services: []
+    relabel_configs:
+      - source_labels: [__meta_consul_service]
+        target_label: service
+      - source_labels: [__meta_consul_node]
+        target_label: node
+      - source_labels: [__meta_consul_dc]
+        target_label: dc
+
+  - job_name: "api-gateway"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["api-gateway:8080"]
+
+  - job_name: "auth-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["auth-service:8081"]
+
+  - job_name: "user-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["user-service:8082"]
+
+  # Add more jobs for additional services as needed

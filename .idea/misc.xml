@@ -20,6 +20,7 @@
         <option value="$PROJECT_DIR$/domains/hr/base-person-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/identity/auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/java/fabric-java-security/pom.xml" />
+        <option value="$PROJECT_DIR$/infrastructure/api-gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -29,7 +30,6 @@
         <option value="$PROJECT_DIR$/domains/contact/email-service/pom.xml" />
         <option value="$PROJECT_DIR$/domains/contact/phone-service/pom.xml" />
         <option value="$PROJECT_DIR$/fabric-parent/pom.xml" />
-        <option value="$PROJECT_DIR$/infrastructure/api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/mail-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/performance-service/pom.xml" />
       </set>

@@ -1,21 +1,29 @@
 #!/bin/bash
 
-# 🧹 Safer Cleanup Script - scripts/dev/cleanup.sh
-# Geliştirme ortamını temizler ama IDE yapı dosyalarına dokunmaz.
-
+# Fail on any error
 set -e
 
-echo "🚀 Hafif temizlik başlatılıyor..."
+echo "Cleaning up development environment..."
 
-# Sadece build çıktıları temizleniyor
-find . -type d -name "target" -exec rm -rf {} +
+# Stop and remove Docker containers
+echo "Stopping Docker containers..."
+docker-compose -f docker-compose.dev.yml down
 
-# Maven metadata (build bilgisi)
-find . -type d -name "maven-status" -exec rm -rf {} +
-find . -type d -name "maven-archiver" -exec rm -rf {} +
+# Remove Docker volumes (optional, comment out if you want to keep your data)
+echo "Removing Docker volumes..."
+docker volume rm fabric-management_postgres-data fabric-management_redis-data fabric-management_consul-data fabric-management_kafka-data fabric-management_prometheus-data fabric-management_grafana-data fabric-management_elasticsearch-data || true
 
-# Geliştiriciya zarar vermeyen şeyler
-find . -type f -name "HELP.md" -delete
+# Clean Maven build artifacts
+echo "Cleaning Maven artifacts..."
+./mvnw clean -f pom.xml
 
-echo "✅ Hafif temizlik tamamlandı. Kodların hâlâ ayakta."
-echo "💡 Eğer IDE'yi patlatmak istersen, orijinal scripti tekrar kullanabilirsin."
+# Clean up subdirectories
+echo "Cleaning subdirectories..."
+./mvnw clean -f fabric-parent/pom.xml || true
+./mvnw clean -f infrastructure/api-gateway/pom.xml || true
+./mvnw clean -f services/identity/auth-service/pom.xml || true
+./mvnw clean -f services/identity/user-service/pom.xml || true
+./mvnw clean -f libraries/java/fabric-java-security/pom.xml || true
+./mvnw clean -f libraries/java/fabric-java-commons/pom.xml || true
+
+echo "Cleanup completed!"
