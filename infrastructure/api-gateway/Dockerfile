@@ -1,25 +1,39 @@
-# Birinci aşama: Derleme
-FROM maven:3.8.6-eclipse-temurin-17-focal as build
+FROM maven:3.8.7-eclipse-temurin-17-alpine AS build
 WORKDIR /app
 
-# Ana projeyi ve tüm modülleri kopyala
+# Copy dependencies first (for better caching)
 COPY pom.xml .
-COPY fabric-parent/ ./fabric-parent/
-COPY libraries/ ./libraries/
-COPY api-gateway/ ./api-gateway/
-COPY auth-service/ ./auth-service/
-COPY java-services/ ./java-services/
+COPY fabric-parent/pom.xml fabric-parent/
+COPY libraries/java/fabric-java-security/pom.xml libraries/java/fabric-java-security/
+COPY infrastructure/api-gateway/pom.xml infrastructure/api-gateway/
 
-# Önce parent ve library modüllerini derle
-RUN mvn -B -f fabric-parent/pom.xml clean install -DskipTests -Ddependency-check.skip=true
-RUN mvn -B -f libraries/fabric-java-commons/pom.xml clean install -DskipTests -Ddependency-check.skip=true
-RUN mvn -B -f libraries/fabric-java-security/pom.xml clean install -DskipTests -Ddependency-check.skip=true
+# Build dependencies without the actual source code
+RUN mvn -B dependency:go-offline -pl infrastructure/api-gateway -am
 
-# Şimdi ilgili servisi derle (örnek: api-gateway için)
-RUN mvn -B -f api-gateway/pom.xml clean package -DskipTests -Ddependency-check.skip=true
+# Copy source code
+COPY libraries/java/fabric-java-security/src/ libraries/java/fabric-java-security/src/
+COPY infrastructure/api-gateway/src/ infrastructure/api-gateway/src/
 
-# İkinci aşama: Çalışma zamanı
-FROM eclipse-temurin:17-jre
+# Build the application
+RUN mvn -B clean package -pl infrastructure/api-gateway -am -DskipTests
+
+# Create final lightweight image
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=build /app/api-gateway/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Add Spring Boot health check agent
+ADD https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.4.10/applicationinsights-agent-3.4.10.jar /app/applicationinsights-agent.jar
+RUN chmod 644 /app/applicationinsights-agent.jar
+
+# Copy the built JAR
+COPY --from=build /app/infrastructure/api-gateway/target/*.jar /app/api-gateway.jar
+
+# Set environment variables
+ENV JAVA_TOOL_OPTIONS="-javaagent:/app/applicationinsights-agent.jar"
+ENV SPRING_PROFILES_ACTIVE=prod
+
+# Expose port
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "/app/api-gateway.jar"]

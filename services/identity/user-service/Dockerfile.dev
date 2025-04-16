@@ -1,0 +1,20 @@
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+
+# Install Maven
+RUN apk add --no-cache maven
+
+# Copy the project files (this will be mounted during development)
+COPY pom.xml .
+COPY fabric-parent/pom.xml fabric-parent/
+COPY libraries/java/fabric-java-security/pom.xml libraries/java/fabric-java-security/
+COPY services/identity/user-service/pom.xml services/identity/user-service/
+
+# Resolve dependencies to enable faster compilation
+RUN mvn -B dependency:go-offline -pl services/identity/user-service -am
+
+# Expose port
+EXPOSE 8082
+
+# Set the default command to run the Spring Boot app
+CMD ["./mvnw", "spring-boot:run", "-f", "services/identity/user-service/pom.xml", "-Dspring-boot.run.profiles=dev"]

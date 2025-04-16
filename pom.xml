@@ -19,7 +19,6 @@
 
     <modules>
         <module>fabric-parent</module>
-        <module>infrastructure/api-gateway</module>
         <module>services/identity/auth-service</module>
         <module>services/identity/user-service</module>
     </modules>

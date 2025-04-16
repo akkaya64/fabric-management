@@ -2,22 +2,14 @@ package com.fabric.auth_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableFeignClients
-@OpenAPIDefinition(
-		info = @Info(
-				title = "Auth Service API",
-				version = "1.0",
-				description = "Authentication and Authorization Service API for Fabric Management",
-				license = @License(name = "Fabric License", url = "https://example.com/license")
-		)
-)
+@ComponentScan(basePackages = {"com.fabric.auth_service", "com.fabric.fabric_java_security"})
 public class AuthServiceApplication {
 
 	public static void main(String[] args) {

@@ -1,161 +1,141 @@
 package com.fabric.auth_service.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fabric.auth_service.client.UserServiceClient;
+import com.fabric.auth_service.exception.BadRequestException;
+import com.fabric.auth_service.exception.ResourceNotFoundException;
+import com.fabric.auth_service.payload.*;
+import com.fabric.fabric_java_security.jwt.JwtProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.fabric.auth_service.client.UserServiceClient;
-import com.fabric.auth_service.exception.TokenRefreshException;
-import com.fabric.auth_service.exception.UserAlreadyExistsException;
-import com.fabric.auth_service.payload.request.CreateUserRequest;
-import com.fabric.auth_service.payload.request.LoginRequest;
-import com.fabric.auth_service.payload.request.RefreshTokenRequest;
-import com.fabric.auth_service.payload.response.JwtResponse;
-import com.fabric.auth_service.payload.response.UserResponse;
-
-import feign.FeignException;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class AuthService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
-
     private final AuthenticationManager authenticationManager;
-    private final JWTService jwtService;
+    private final JwtProvider jwtProvider;
     private final UserServiceClient userServiceClient;
+    private final EmailService emailService;
+    private final SmsService smsService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthService(
-            AuthenticationManager authenticationManager,
-            JWTService jwtService,
-            UserServiceClient userServiceClient,
-            PasswordEncoder passwordEncoder) {
+    // Cache for verification codes (In production, use Redis or similar)
+    private final Map<String, VerificationData> verificationCodes = new HashMap<>();
+
+    @Autowired
+    public AuthService(AuthenticationManager authenticationManager, JwtProvider jwtProvider,
+                       UserServiceClient userServiceClient, EmailService emailService,
+                       SmsService smsService, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
+        this.jwtProvider = jwtProvider;
         this.userServiceClient = userServiceClient;
+        this.emailService = emailService;
+        this.smsService = smsService;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public JwtResponse login(LoginRequest loginRequest) {
+    public JwtAuthResponse authenticateUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()
+                )
+        );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtProvider.generateToken(authentication);
+        String refreshToken = jwtProvider.generateRefreshToken(authentication.getName());
 
-        User userDetails = (User) authentication.getPrincipal();
-
-        String accessToken = jwtService.generateAccessToken(authentication);
-        String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername());
-
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        // Get user details from user-service
-        UserResponse userResponse = userServiceClient.getUserByUsername(userDetails.getUsername()).getBody();
-
-        if (userResponse == null) {
-            throw new RuntimeException("User details could not be retrieved");
-        }
-
-        return new JwtResponse(
-                accessToken,
-                refreshToken,
-                userResponse.getId(),
-                userResponse.getUsername(),
-                userResponse.getEmail(),
-                roles);
+        return new JwtAuthResponse(jwt, refreshToken);
     }
 
-    public JwtResponse refreshToken(RefreshTokenRequest request) {
-        String refreshToken = request.getRefreshToken();
+    public void sendUserVerification(String userId) {
+        try {
+            UserResponse user = userServiceClient.getUserById(userId);
+            String verificationCode = generateVerificationCode();
+            String verificationToken = jwtProvider.generateVerificationToken(userId);
 
-        if (!jwtService.validateToken(refreshToken)) {
-            throw new TokenRefreshException(refreshToken, "Refresh token is invalid");
+            // Store verification data (In production, use Redis or similar)
+            verificationCodes.put(userId, new VerificationData(verificationCode, verificationToken));
+
+            // Send verification code via email
+            if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+                emailService.sendVerificationEmail(user.getEmail(), verificationCode);
+            }
+
+            // Send verification code via SMS
+            if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty()) {
+                smsService.sendVerificationSms(user.getPhoneNumber(), verificationCode);
+            }
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("User", "id", userId);
         }
-
-        String username = jwtService.extractUsername(refreshToken);
-
-        // Get user details from user-service
-        UserResponse userResponse = userServiceClient.getUserByUsername(username).getBody();
-
-        if (userResponse == null) {
-            throw new RuntimeException("User details could not be retrieved");
-        }
-
-        // Create a UserDetails object with the roles from the userResponse
-        List<GrantedAuthority> authorities = userResponse.getRoles().stream()
-                .map(role -> (GrantedAuthority) () -> role)
-                .collect(Collectors.toList());
-
-        UserDetails userDetails = new User(username, "", authorities);
-
-        // Generate new access token
-        String accessToken = jwtService.generateAccessToken(
-                username,
-                authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
-
-        // Generate new refresh token
-        String newRefreshToken = jwtService.generateRefreshToken(username);
-
-        List<String> roles = authorities.stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        return new JwtResponse(
-                accessToken,
-                newRefreshToken,
-                userResponse.getId(),
-                userResponse.getUsername(),
-                userResponse.getEmail(),
-                roles);
     }
 
-    public UserResponse register(CreateUserRequest request) {
-        // Check if username already exists
-        try {
-            UserResponse existingUser = userServiceClient.getUserByUsername(request.getUsername()).getBody();
-            if (existingUser != null) {
-                throw new UserAlreadyExistsException("Username is already taken");
-            }
-        } catch (FeignException.NotFound ex) {
-            // Username doesn't exist, continue
+    public JwtAuthResponse verifyAndSetupPassword(PasswordSetupRequest request) {
+        VerificationData verificationData = verificationCodes.get(request.getUserId());
+
+        if (verificationData == null || !verificationData.getVerificationCode().equals(request.getVerificationCode())) {
+            throw new BadRequestException("Invalid verification code");
         }
 
-        // Check if email already exists
-        try {
-            UserResponse existingUser = userServiceClient.getUserByEmail(request.getEmail()).getBody();
-            if (existingUser != null) {
-                throw new UserAlreadyExistsException("Email is already in use");
-            }
-        } catch (FeignException.NotFound ex) {
-            // Email doesn't exist, continue
+        // Update user password in User Service (using client)
+        // This would involve a call to User Service
+        // userServiceClient.updatePassword(request.getUserId(), passwordEncoder.encode(request.getPassword()));
+
+        // Generate tokens
+        String accessToken = jwtProvider.generateToken(request.getUserId());
+        String refreshToken = jwtProvider.generateRefreshToken(request.getUserId());
+
+        // Remove verification data
+        verificationCodes.remove(request.getUserId());
+
+        return new JwtAuthResponse(accessToken, refreshToken);
+    }
+
+    public JwtAuthResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        boolean isValid = jwtProvider.validateToken(refreshTokenRequest.getRefreshToken());
+
+        if (!isValid) {
+            throw new BadRequestException("Invalid refresh token");
         }
 
-        // Encode password
-        request.setPassword(passwordEncoder.encode(request.getPassword()));
+        String userId = jwtProvider.getUserIdFromJWT(refreshTokenRequest.getRefreshToken());
+        String newAccessToken = jwtProvider.generateToken(userId);
 
-        // Set default roles if none provided
-        if (request.getRoles() == null || request.getRoles().isEmpty()) {
-            Set<String> roles = new HashSet<>();
-            roles.add("ROLE_USER");
-            request.setRoles(roles);
+        return new JwtAuthResponse(newAccessToken, refreshTokenRequest.getRefreshToken());
+    }
+
+    private String generateVerificationCode() {
+        Random random = new Random();
+        int code = 100000 + random.nextInt(900000); // 6-digit code
+        return String.valueOf(code);
+    }
+
+    private static class VerificationData {
+        private final String verificationCode;
+        private final String verificationToken;
+
+        public VerificationData(String verificationCode, String verificationToken) {
+            this.verificationCode = verificationCode;
+            this.verificationToken = verificationToken;
         }
 
-        // Create user in user-service
-        return userServiceClient.createUser(request).getBody();
+        public String getVerificationCode() {
+            return verificationCode;
+        }
+
+        public String getVerificationToken() {
+            return verificationToken;
+        }
     }
 }
