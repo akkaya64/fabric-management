@@ -23,6 +23,11 @@ public class ApiResponse<T> {
     private LocalDateTime timestamp = LocalDateTime.now();
     private T data;
 
+    public ApiResponse<T> withData(T data) {
+        this.data = data;
+        return this;
+    }
+
     public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
                 .success(true)
