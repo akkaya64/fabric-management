@@ -1,129 +1,111 @@
 package com.fabric.fabric_java_security.jwt;
 
-import io.jsonwebtoken.*;
+import com.fabric.fabric_java_security.model.UserPrincipal;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SignatureException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtProvider {
-    private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-    @Value("${app.jwt.secret:defaultSecretKeyWhichShouldBeChangedInProduction}")
+    @Value("${fabric.security.jwt.secret}")
     private String jwtSecret;
 
-    @Value("${app.jwt.expiration:86400000}")
+    @Value("${fabric.security.jwt.expiration}")
     private int jwtExpirationInMs;
 
-    @Value("${app.jwt.refreshExpiration:604800000}")
-    private int refreshTokenExpirationInMs;
-
     public String generateToken(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return generateToken(userDetails.getUsername());
-    }
-
-    public String generateToken(String userId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
-        return Jwts.builder()
-                .setSubject(userId)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(getSigningKey())
-                .compact();
-    }
-
-    public String generateTokenWithClaims(String userId, Map<String, Object> claims) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userId)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(getSigningKey())
-                .compact();
-    }
-
-    public String generateVerificationToken(String userId) {
-        // Verification tokens should expire faster
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + (30 * 60 * 1000)); // 30 minutes
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("purpose", "verification");
+        claims.put("roles", authorities);
+
+        // Add additional claims if present
+        if (authentication.getPrincipal() instanceof UserPrincipal userPrincipal) {
+            claims.put("userId", userPrincipal.getId());
+            claims.put("email", userPrincipal.getEmail());
+
+            if (userPrincipal.getCompanyId() != null) {
+                claims.put("companyId", userPrincipal.getCompanyId());
+                claims.put("companyType", userPrincipal.getCompanyType());
+            }
+        }
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(userId)
+                .setSubject(authentication.getName())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(getSigningKey())
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
-    public String generateRefreshToken(String userId) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + refreshTokenExpirationInMs);
-
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("purpose", "refresh");
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userId)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(getSigningKey())
-                .compact();
+    public String getUsernameFromToken(String token) {
+        Claims claims = parseToken(token);
+        return claims.getSubject();
     }
 
-    public String getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parserBuilder()
+    public Long getUserIdFromToken(String token) {
+        Claims claims = parseToken(token);
+        return claims.get("userId", Long.class);
+    }
+
+    public String getEmailFromToken(String token) {
+        Claims claims = parseToken(token);
+        return claims.get("email", String.class);
+    }
+
+    public Long getCompanyIdFromToken(String token) {
+        Claims claims = parseToken(token);
+        return claims.get("companyId", Long.class);
+    }
+
+    public String getCompanyTypeFromToken(String token) {
+        Claims claims = parseToken(token);
+        return claims.get("companyType", String.class);
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            parseToken(token);
+            return true;
+        } catch (Exception ex) {
+            log.error("JWT validation error: {}", ex.getMessage());
+            return false;
+        }
+    }
+
+    private Claims parseToken(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-
-        return claims.getSubject();
     }
 
-    public boolean validateToken(String authToken) {
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
-                    .build()
-                    .parseClaimsJws(authToken);
-            return true;
-        } catch (SignatureException ex) {
-            logger.error("Invalid JWT signature");
-        } catch (MalformedJwtException ex) {
-            logger.error("Invalid JWT token");
-        } catch (ExpiredJwtException ex) {
-            logger.error("Expired JWT token");
-        } catch (UnsupportedJwtException ex) {
-            logger.error("Unsupported JWT token");
-        } catch (IllegalArgumentException ex) {
-            logger.error("JWT claims string is empty");
-        }
-        return false;
-    }
-
-    private Key getSigningKey() {
-        byte[] keyBytes = jwtSecret.getBytes();
+    private SecretKey getSigningKey() {
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
