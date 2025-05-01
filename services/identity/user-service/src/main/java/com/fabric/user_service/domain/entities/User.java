@@ -1,75 +1,83 @@
 package com.fabric.user_service.domain.entities;
 
-import com.fabric.user_service.domain.enums.CompetencyLevel;
-import com.fabric.user_service.domain.enums.Department;
-import com.fabric.user_service.domain.enums.Position;
-import com.fabric.user_service.domain.enums.UserStatus;
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-public class User extends BaseEntity{
-    @Column(length = 50, nullable = false)
-    private String firstName;
+@Entity
+@Table(name = "users")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
 
-    @Column(length = 50, nullable = false)
-    private String lastName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true)
+    private String email;
+
     private String password;
 
-    @Column(nullable = false)
-    private Boolean hasVerifiedEmail;
+    @Builder.Default
+    private boolean enabled = false;
 
-    @Column(nullable = false)
-    private Boolean hasVerifiedPhone;
+    @Builder.Default
+    private boolean accountNonExpired = true;
 
-    @Column(name = "company_id", nullable = false)
-    private UUID companyId;
+    @Builder.Default
+    private boolean credentialsNonExpired = true;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Department department;
+    @Builder.Default
+    private boolean accountNonLocked = true;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Position position;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CompetencyLevel competencyLevel;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserStatus status;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<UserContact> contacts = new ArrayList<>();
 
-    @Column
-    private String locale;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<UserCompany> companies = new ArrayList<>();
 
-    @Column
-    private String timezone;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<VerificationToken> verificationTokens = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private final Set<UserRole> userRoles = new HashSet<>();
+    public void addContact(UserContact contact) {
+        contacts.add(contact);
+        contact.setUser(this);
+    }
 
-    @Column
-    private LocalDateTime lastPasswordChangeAt;
+    public void removeContact(UserContact contact) {
+        contacts.remove(contact);
+        contact.setUser(null);
+    }
 
-    @Column
-    private Boolean forcePasswordChange;
+    public void addCompany(UserCompany company) {
+        companies.add(company);
+        company.setUser(this);
+    }
 
-    @Column
-    private LocalDateTime lastLoginAt;
+    public void removeCompany(UserCompany company) {
+        companies.remove(company);
+        company.setUser(null);
+    }
 
-    @Column
-    private String lastLoginIp;
-
-    @Column
-    private Integer failedLoginAttempts;
-
-    @Column
-    private LocalDateTime lockedUntil;
+    public void addVerificationToken(VerificationToken token) {
+        verificationTokens.add(token);
+        token.setUser(this);
+    }
 }
