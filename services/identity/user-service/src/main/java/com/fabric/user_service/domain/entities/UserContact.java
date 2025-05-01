@@ -1,4 +1,5 @@
 package com.fabric.user_service.domain.entities;
+import com.fabric.user_service.domain.enums.ContactType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,9 +44,4 @@ public class UserContact {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    public enum ContactType {
-        EMAIL,
-        PHONE
-    }
 }

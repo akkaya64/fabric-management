@@ -1,5 +1,6 @@
 package com.fabric.user_service.domain.entities;
 
+import com.fabric.user_service.domain.enums.TokenType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,12 +47,5 @@ public class VerificationToken {
 
     public boolean isExpired() {
         return LocalDateTime.now().isAfter(this.expiryDate);
-    }
-
-    public enum TokenType {
-        EMAIL_VERIFICATION,
-        PHONE_VERIFICATION,
-        PASSWORD_RESET,
-        INITIAL_PASSWORD_SETUP
     }
 }

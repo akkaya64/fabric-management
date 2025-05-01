@@ -1,4 +1,8 @@
 package com.fabric.user_service.domain.enums;
 
-public class CompanyType {
+public enum CompanyType {
+    INTERNAL,
+    SUPPLIER,
+    CUSTOMER,
+    PARTNER
 }
