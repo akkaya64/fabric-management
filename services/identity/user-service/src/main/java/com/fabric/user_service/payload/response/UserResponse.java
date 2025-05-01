@@ -1,4 +1,4 @@
-package com.fabric.auth_service.payload.response;
+package com.fabric.user_service.payload.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
