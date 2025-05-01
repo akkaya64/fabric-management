@@ -1,4 +1,6 @@
 package com.fabric.user_service.domain.enums;
 
-public class ContactType {
+public enum ContactType {
+    EMAIL,
+    PHONE
 }

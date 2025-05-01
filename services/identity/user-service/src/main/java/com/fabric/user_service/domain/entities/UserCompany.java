@@ -1,5 +1,6 @@
 package com.fabric.user_service.domain.entities;
 
+import com.fabric.user_service.domain.enums.CompanyType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,11 +46,4 @@ public class UserCompany {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    public enum CompanyType {
-        INTERNAL,
-        SUPPLIER,
-        CUSTOMER,
-        PARTNER
-    }
 }
