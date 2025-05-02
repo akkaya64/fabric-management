@@ -20,6 +20,6 @@
     <file url="file://$PROJECT_DIR$/services/identity/authservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/identity/authservice/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/identity/userservice/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/services/organization/company-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/organization/companyservice/src/main/java" charset="UTF-8" />
   </component>
 </project>
