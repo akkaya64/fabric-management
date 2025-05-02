@@ -32,6 +32,7 @@
         <option value="$PROJECT_DIR$/fabric-parent/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/mail-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/performance-service/pom.xml" />
+        <option value="$PROJECT_DIR$/services/identity/authservice/pom.xml" />
       </set>
     </option>
   </component>

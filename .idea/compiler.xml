@@ -9,8 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="fabric-java-security" />
-        <module name="auth-service" />
-        <module name="user-service" />
       </profile>
       <profile name="Annotation profile for Fabric Management" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -19,15 +17,15 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="finance-service" />
         <module name="company-service" />
+        <module name="finance-service" />
         <module name="base-person-service" />
         <module name="employee-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="17" />
-      <module name="auth-service" target="17" />
+      <module name="authservice" target="17" />
       <module name="base-person-service" target="17" />
       <module name="company-service" target="17" />
       <module name="contact-service" target="17" />
@@ -42,13 +40,13 @@
       <module name="mail-service" target="17" />
       <module name="performance-service" target="17" />
       <module name="phone-service" target="17" />
-      <module name="user-service" target="17" />
+      <module name="userservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
-      <module name="auth-service" options="-parameters" />
+      <module name="authservice" options="-parameters" />
       <module name="base-person-service" options="-parameters" />
       <module name="company-service" options="-parameters" />
       <module name="contact-service" options="-parameters" />
@@ -61,7 +59,7 @@
       <module name="mail-service" options="-parameters" />
       <module name="performance-service" options="-parameters" />
       <module name="phone-service" options="-parameters" />
-      <module name="user-service" options="-parameters" />
+      <module name="userservice" options="-parameters" />
     </option>
   </component>
 </project>
