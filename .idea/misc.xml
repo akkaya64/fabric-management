@@ -24,6 +24,7 @@
         <option value="$PROJECT_DIR$/services/identity/user-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/finance/finance-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/hr/employe-eservice/pom.xml" />
+        <option value="$PROJECT_DIR$/services/organization/company-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

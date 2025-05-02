@@ -10,7 +10,9 @@
         <module name="fabric-java-security" />
         <module name="auth-service" />
         <module name="user-service" />
+        <module name="company-service" />
         <module name="finance-service" />
+        <module name="employee-service" />
       </profile>
       <profile name="Annotation profile for Fabric Management" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -28,6 +30,7 @@
       <module name="authservice" target="17" />
       <module name="base-person-service" target="17" />
       <module name="company" target="17" />
+      <module name="company-service" target="17" />
       <module name="contact-service" target="17" />
       <module name="contactMessage-service" target="17" />
       <module name="email-service" target="17" />
@@ -51,6 +54,7 @@
       <module name="authservice" options="-parameters" />
       <module name="base-person-service" options="-parameters" />
       <module name="company" options="-parameters" />
+      <module name="company-service" options="-parameters" />
       <module name="contact-service" options="-parameters" />
       <module name="contactMessage-service" options="-parameters" />
       <module name="email-service" options="-parameters" />
