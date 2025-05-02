@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" filepath="$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/organization/company-service/company-service.iml" filepath="$PROJECT_DIR$/services/organization/company-service/company-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/hr/employee-service/employee-service.iml" filepath="$PROJECT_DIR$/services/hr/employee-service/employee-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/java/fabric-java-security/fabric-java-security.iml" filepath="$PROJECT_DIR$/libraries/java/fabric-java-security/fabric-java-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/fabric-management.iml" filepath="$PROJECT_DIR$/fabric-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" />
