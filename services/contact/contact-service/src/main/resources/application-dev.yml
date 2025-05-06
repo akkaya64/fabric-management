@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fabric_contact_db
+    username: postgres
+    password: postgres
