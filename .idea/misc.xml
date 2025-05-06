@@ -28,6 +28,7 @@
         <option value="$PROJECT_DIR$/services/contact/contact-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/notification/notification-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/production/yarn-service/pom.xml" />
+        <option value="$PROJECT_DIR$/services/production/weaving-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

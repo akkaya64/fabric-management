@@ -24,7 +24,7 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for yarn-service" enabled="true">
+      <profile name="Annotation profile for weaving-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -32,6 +32,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="contact-service" />
+        <module name="weaving-service" />
         <module name="notification-service" />
         <module name="yarn-service" />
       </profile>
@@ -59,6 +60,7 @@
       <module name="phone-service" target="17" />
       <module name="user-service" target="17" />
       <module name="userservice" target="17" />
+      <module name="weaving-service" target="17" />
       <module name="yarn-service" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -84,6 +86,7 @@
       <module name="phone-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="userservice" options="-parameters" />
+      <module name="weaving-service" options="-parameters" />
       <module name="yarn-service" options="-parameters" />
     </option>
   </component>
