@@ -1,0 +1,17 @@
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+
+# Sadece pom.xml dosyasını kopyala ve bağımlılıkları indir
+# Bu adım, Docker layer cache'leme için faydalı olacaktır
+COPY pom.xml .
+RUN apk add --no-cache maven && \
+    mvn dependency:go-offline && \
+    apk del maven
+
+# Uygulama kodunu kopyala
+COPY src ./src
+
+# Development için Spring Boot'u başlat
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=dev"]
+
+EXPOSE 8082

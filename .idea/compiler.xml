@@ -24,7 +24,7 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for contact-service" enabled="true">
+      <profile name="Annotation profile for weaving-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -32,6 +32,9 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="contact-service" />
+        <module name="weaving-service" />
+        <module name="notification-service" />
+        <module name="yarn-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -52,10 +55,13 @@
       <module name="fabric-parent" target="1.5" />
       <module name="finance-service" target="17" />
       <module name="mail-service" target="17" />
+      <module name="notification-service" target="17" />
       <module name="performance-service" target="17" />
       <module name="phone-service" target="17" />
       <module name="user-service" target="17" />
       <module name="userservice" target="17" />
+      <module name="weaving-service" target="17" />
+      <module name="yarn-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -75,10 +81,13 @@
       <module name="fabric-java-security" options="-parameters" />
       <module name="finance-service" options="-parameters" />
       <module name="mail-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="performance-service" options="-parameters" />
       <module name="phone-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="userservice" options="-parameters" />
+      <module name="weaving-service" options="-parameters" />
+      <module name="yarn-service" options="-parameters" />
     </option>
   </component>
 </project>

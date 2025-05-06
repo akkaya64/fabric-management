@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  weaving-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: weaving-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - postgres
+      - kafka
+      - discovery-server
+    volumes:
+      - ./src:/app/src
+      - maven-repo:/root/.m2
+    networks:
+      - fabric-network
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: weaving-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=weaving_db
+      - POSTGRES_USER=dev_user
+      - POSTGRES_PASSWORD=dev_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - fabric-network
+
+  # Kafka ve Zookeeper, başka bir compose dosyasında olabilir
+  # Burada sadece geliştirme ortamı için basit bir kurulum yapıyoruz
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - fabric-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - fabric-network
+
+  # Eureka Discovery Server - Production'da ayrı bir service olacak
+  discovery-server:
+    image: springcloud/eureka
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    networks:
+      - fabric-network
+
+volumes:
+  postgres-data:
+  maven-repo:
+
+networks:
+  fabric-network:
+    driver: bridge
