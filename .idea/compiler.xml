@@ -24,7 +24,7 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for contact-service" enabled="true">
+      <profile name="Annotation profile for notification-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -32,6 +32,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="contact-service" />
+        <module name="notification-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -52,6 +53,7 @@
       <module name="fabric-parent" target="1.5" />
       <module name="finance-service" target="17" />
       <module name="mail-service" target="17" />
+      <module name="notification-service" target="17" />
       <module name="performance-service" target="17" />
       <module name="phone-service" target="17" />
       <module name="user-service" target="17" />
@@ -75,6 +77,7 @@
       <module name="fabric-java-security" options="-parameters" />
       <module name="finance-service" options="-parameters" />
       <module name="mail-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="performance-service" options="-parameters" />
       <module name="phone-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
