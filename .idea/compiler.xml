@@ -7,11 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="fabric-java-security" />
         <module name="auth-service" />
+        <module name="finance-service" />
+        <module name="api-gateway" />
+        <module name="fabric-java-security" />
         <module name="user-service" />
         <module name="company-service" />
-        <module name="finance-service" />
         <module name="employee-service" />
       </profile>
       <profile name="Annotation profile for Fabric Management" enabled="true">
@@ -25,6 +26,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-gateway" target="17" />
       <module name="apigateway" target="17" />
       <module name="auth-service" target="17" />
       <module name="authservice" target="17" />
@@ -49,6 +51,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="apigateway" options="-parameters" />
       <module name="auth-service" options="-parameters" />
       <module name="authservice" options="-parameters" />

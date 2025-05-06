@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/infrastructure/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/infrastructure/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" filepath="$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/organization/company-service/company-service.iml" filepath="$PROJECT_DIR$/services/organization/company-service/company-service.iml" />
