@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/fabric-management.iml" filepath="$PROJECT_DIR$/fabric-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/notification/notification-service/notification-service.iml" filepath="$PROJECT_DIR$/services/notification/notification-service/notification-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/production/quality-control-service/quality-control-service.iml" filepath="$PROJECT_DIR$/services/production/quality-control-service/quality-control-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/identity/user-service/user-service.iml" filepath="$PROJECT_DIR$/services/identity/user-service/user-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/production/weaving-service/weaving-service.iml" filepath="$PROJECT_DIR$/services/production/weaving-service/weaving-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/production/yarn-service/yarn-service.iml" filepath="$PROJECT_DIR$/services/production/yarn-service/yarn-service.iml" />

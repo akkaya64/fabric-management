@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quality_control_db
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+  cloud:
+    config:
+      enabled: false
+
+server:
+  port: 8084
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    com.fabric.qualitycontrol: DEBUG
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG

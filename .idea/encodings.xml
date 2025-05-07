@@ -31,6 +31,8 @@
     <file url="file://$PROJECT_DIR$/services/organization/company-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/production/dyeing-finishing-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/production/dyeing-finishing-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/production/quality-control-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/production/quality-control-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/production/weaving-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/production/weaving-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/production/yarn-service/src/main/java" charset="UTF-8" />
