@@ -24,7 +24,7 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for weaving-service" enabled="true">
+      <profile name="Annotation profile for dyeing-finishing-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -32,6 +32,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="contact-service" />
+        <module name="dyeing-finishing-service" />
         <module name="weaving-service" />
         <module name="notification-service" />
         <module name="yarn-service" />
@@ -47,6 +48,7 @@
       <module name="company-service" target="17" />
       <module name="contact-service" target="17" />
       <module name="contactMessage-service" target="17" />
+      <module name="dyeing-finishing-service" target="17" />
       <module name="email-service" target="17" />
       <module name="employee-service" target="17" />
       <module name="fabric-java-commons" target="17" />
@@ -75,6 +77,7 @@
       <module name="company-service" options="-parameters" />
       <module name="contact-service" options="-parameters" />
       <module name="contactMessage-service" options="-parameters" />
+      <module name="dyeing-finishing-service" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="fabric-java-commons" options="-parameters" />
