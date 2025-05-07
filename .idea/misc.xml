@@ -30,6 +30,7 @@
         <option value="$PROJECT_DIR$/services/production/yarn-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/production/weaving-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/production/dyeing-finishing-service/pom.xml" />
+        <option value="$PROJECT_DIR$/services/production/quality-control-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
