@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: ${REGISTRY}/fabric/api-gateway:${VERSION}
+          image: ${REGISTRY}/fabric-management/api-gateway:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

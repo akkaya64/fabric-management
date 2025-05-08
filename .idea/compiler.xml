@@ -24,18 +24,21 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for quality-control-service" enabled="true">
+      <profile name="Annotation profile for transportation-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
+        <module name="stock-service" />
+        <module name="transportation-service" />
         <module name="contact-service" />
         <module name="dyeing-finishing-service" />
         <module name="weaving-service" />
-        <module name="notification-service" />
+        <module name="warehouse-service" />
         <module name="quality-control-service" />
+        <module name="notification-service" />
         <module name="yarn-service" />
       </profile>
     </annotationProcessing>
@@ -62,8 +65,11 @@
       <module name="performance-service" target="17" />
       <module name="phone-service" target="17" />
       <module name="quality-control-service" target="17" />
+      <module name="stock-service" target="17" />
+      <module name="transportation-service" target="17" />
       <module name="user-service" target="17" />
       <module name="userservice" target="17" />
+      <module name="warehouse-service" target="17" />
       <module name="weaving-service" target="17" />
       <module name="yarn-service" target="17" />
     </bytecodeTargetLevel>
@@ -90,8 +96,11 @@
       <module name="performance-service" options="-parameters" />
       <module name="phone-service" options="-parameters" />
       <module name="quality-control-service" options="-parameters" />
+      <module name="stock-service" options="-parameters" />
+      <module name="transportation-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="userservice" options="-parameters" />
+      <module name="warehouse-service" options="-parameters" />
       <module name="weaving-service" options="-parameters" />
       <module name="yarn-service" options="-parameters" />
     </option>

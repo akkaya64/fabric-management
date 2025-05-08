@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: employee-service
-          image: ${REGISTRY}/fabric/employee-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/employee-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

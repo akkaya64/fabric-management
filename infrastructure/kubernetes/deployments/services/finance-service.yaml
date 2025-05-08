@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: finance-service
-          image: ${REGISTRY}/fabric/finance-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/finance-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
