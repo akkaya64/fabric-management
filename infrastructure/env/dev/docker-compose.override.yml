@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # Development overrides
+  api-gateway:
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - LOGGING_LEVEL_ROOT=INFO
+      - LOGGING_LEVEL_COM_FABRIC=DEBUG
+      - SPRING_JPA_SHOW_SQL=true
+
+  # Add development-specific configurations for other services
+  auth-service:
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - LOGGING_LEVEL_ROOT=INFO
+      - LOGGING_LEVEL_COM_FABRIC=DEBUG
+      - SPRING_JPA_SHOW_SQL=true
+
+  user-service:
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - LOGGING_LEVEL_ROOT=INFO
+      - LOGGING_LEVEL_COM_FABRIC=DEBUG
+      - SPRING_JPA_SHOW_SQL=true

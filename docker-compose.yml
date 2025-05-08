@@ -254,7 +254,7 @@ services:
   auth-service:
     build:
       context: .  # Kök dizin
-      dockerfile: services/identity/auth-service/Dockerfile
+      dockerfile: services/identity/services/identity/auth-service/Dockerfile
       args:
         SPRING_PROFILES_ACTIVE: dev
     environment:
