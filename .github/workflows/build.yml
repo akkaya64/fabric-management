@@ -22,7 +22,9 @@ jobs:
     - name: Fix dependency issues for CI
       run: |
         chmod +x scripts/ci-dependency-fix.sh
+        chmod +x scripts/fix-pom-versions-direct.sh
         ./scripts/ci-dependency-fix.sh
+        ./scripts/fix-pom-versions-direct.sh
         
     - name: Verify Java commons and security libraries
       run: |
