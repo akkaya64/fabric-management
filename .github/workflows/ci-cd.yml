@@ -31,8 +31,20 @@ jobs:
           chmod +x scripts/fix-dependency-issues.sh
           ./scripts/fix-dependency-issues.sh
           
+      - name: Verify Java commons and security libraries
+        run: |
+          echo "Verifying fabric-java-commons and fabric-java-security in local Maven repository"
+          ls -la ~/.m2/repository/com/fabric/fabric-java-commons/ || echo "fabric-java-commons not found"
+          ls -la ~/.m2/repository/com/fabric/fabric-java-security/ || echo "fabric-java-security not found"
+          
       - name: Build with Maven
         run: mvn clean verify -Dmaven.enforcer.skip=true
+
+      - name: Build logistics services specifically
+        run: |
+          echo "Building logistics services specifically..."
+          mvn clean verify -f services/logistics/shipping-service/pom.xml -Dmaven.enforcer.skip=true
+          mvn clean verify -f services/logistics/transportation-service/pom.xml -Dmaven.enforcer.skip=true
 
       - name: Run Tests
         run: mvn test -Dmaven.enforcer.skip=true
@@ -49,6 +61,18 @@ jobs:
         run: |
           chmod +x scripts/fix-dependency-issues.sh
           ./scripts/fix-dependency-issues.sh
+          
+      - name: Verify Java commons and security libraries
+        run: |
+          echo "Verifying fabric-java-commons and fabric-java-security in local Maven repository"
+          ls -la ~/.m2/repository/com/fabric/fabric-java-commons/ || echo "fabric-java-commons not found"
+          ls -la ~/.m2/repository/com/fabric/fabric-java-security/ || echo "fabric-java-security not found"
+          
+      - name: Maven package with dependencies
+        run: |
+          mvn clean package -DskipTests -Dmaven.enforcer.skip=true
+          mvn package -f services/logistics/shipping-service/pom.xml -DskipTests -Dmaven.enforcer.skip=true
+          mvn package -f services/logistics/transportation-service/pom.xml -DskipTests -Dmaven.enforcer.skip=true
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -73,8 +97,20 @@ jobs:
           context: ./services/identity/auth-service
           push: true
           tags: ${{ env.REGISTRY }}/fabric/auth-service:${{ env.VERSION }},${{ env.REGISTRY }}/fabric/auth-service:latest
-
-    # Diğer servisler için benzer adımlar ekleyin
+          
+      - name: Build and push Shipping Service
+        uses: docker/build-push-action@v4
+        with:
+          context: ./services/logistics/shipping-service
+          push: true
+          tags: ${{ env.REGISTRY }}/fabric/shipping-service:${{ env.VERSION }},${{ env.REGISTRY }}/fabric/shipping-service:latest
+          
+      - name: Build and push Transportation Service
+        uses: docker/build-push-action@v4
+        with:
+          context: ./services/logistics/transportation-service
+          push: true
+          tags: ${{ env.REGISTRY }}/fabric/transportation-service:${{ env.VERSION }},${{ env.REGISTRY }}/fabric/transportation-service:latest
 
   deploy-dev:
     needs: docker-build

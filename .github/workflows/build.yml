@@ -24,5 +24,17 @@ jobs:
         chmod +x scripts/fix-dependency-issues.sh
         ./scripts/fix-dependency-issues.sh
         
+    - name: Verify Java commons and security libraries
+      run: |
+        echo "Verifying fabric-java-commons and fabric-java-security in local Maven repository"
+        ls -la ~/.m2/repository/com/fabric/fabric-java-commons/ || echo "fabric-java-commons not found"
+        ls -la ~/.m2/repository/com/fabric/fabric-java-security/ || echo "fabric-java-security not found"
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml -Dmaven.enforcer.skip=true -DskipTests
+      
+    - name: Build logistics services
+      run: |
+        echo "Building logistics services specifically..."
+        mvn -B package --file services/logistics/shipping-service/pom.xml -Dmaven.enforcer.skip=true -DskipTests
+        mvn -B package --file services/logistics/transportation-service/pom.xml -Dmaven.enforcer.skip=true -DskipTests
