@@ -257,6 +257,57 @@ services:
   #   networks:
   #     - fabric-network
 
+  # Logistics services
+  shipping-service:
+    build:
+      context: ./services/logistics/shipping-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8088:8088"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/fabric_shipping_db
+      - SPRING_DATASOURCE_USERNAME=fabric
+      - SPRING_DATASOURCE_PASSWORD=fabric123
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - postgres
+      - consul
+      - kafka
+      - zipkin
+    networks:
+      - fabric-network
+
+  transportation-service:
+    build:
+      context: ./services/logistics/transportation-service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=transportation_db
+      - POSTGRES_USER=fabric
+      - POSTGRES_PASSWORD=fabric123
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
+      - KAFKA_SERVERS=kafka:9092
+      - SERVER_PORT=8087
+      - EUREKA_SERVER_URL=http://consul:8500/eureka/
+    depends_on:
+      - postgres
+      - consul
+      - kafka
+      - zipkin
+    networks:
+      - fabric-network
+
 networks:
   fabric-network:
     driver: bridge
