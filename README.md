@@ -24,12 +24,36 @@ GitOps (ArgoCD) + Helm + Kubernetes deployment
 
 🚀 Hızlı Başlangıç (Development)
 
+```bash
+# Bağımlılık sorunlarını düzelt
+$ chmod +x scripts/fix-dependency-issues.sh
+$ ./scripts/fix-dependency-issues.sh
+
+# Tüm servisleri derle
+$ chmod +x scripts/build-all-services.sh
+$ ./scripts/build-all-services.sh
+
 # Gerekli Docker konteynerlerini başlat
 $ docker-compose -f docker-compose.dev.yml up -d
 
 # Servis örneği çalıştır (örnek: auth-service)
 $ cd services/identity/auth-service
 $ ./mvnw spring-boot:run
+```
+
+🐳 Docker ve Kubernetes İle Çalıştırma
+
+```bash
+# Tüm servisleri Docker Compose ile çalıştırma
+$ docker-compose -f docker-compose-all.yml up -d
+
+# Test ortamını çalıştırma
+$ docker-compose -f docker-compose.test.yml up -d
+
+# Kubernetes'e deploy etme
+$ chmod +x infrastructure/kubernetes/scripts/deploy-all.sh
+$ ./infrastructure/kubernetes/scripts/deploy-all.sh
+```
 
 📁 Klasör Yapısı
 
@@ -96,6 +120,23 @@ Maven
 Node.js (opsiyonel - frontend için)
 
 Flutter SDK (mobil geliştirme için)
+
+🔍 İzleme ve Gözlemleme
+
+Proje şu izleme araçlarını içerir:
+- Prometheus (metrikler): http://localhost:9090
+- Grafana (dashboardlar): http://localhost:3000
+- ELK stack (loglama): http://localhost:5601
+- Zipkin (dağıtık izleme): http://localhost:9411
+
+🧹 Proje Temizleme
+
+Gereksiz dosyaları temizlemek ve projeyi daha verimli hale getirmek için:
+
+```bash
+chmod +x scripts/cleanup-project.sh
+./scripts/cleanup-project.sh
+```
 
 🤝 Katkıda Bulunma
 

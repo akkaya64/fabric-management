@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: base-person-service
-          image: ${REGISTRY}/fabric/base-person-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/base-person-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

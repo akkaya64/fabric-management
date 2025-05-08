@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: email-service
-          image: ${REGISTRY}/fabric/email-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/email-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

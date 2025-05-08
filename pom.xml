@@ -24,6 +24,8 @@
         <module>services/identity/auth-service</module>
         <module>services/identity/user-service</module>
         <module>services/organization/company-service</module>
+        <module>services/logistics/shipping-service</module>
+        <module>services/logistics/transportation-service</module>
     </modules>
 
     <build>

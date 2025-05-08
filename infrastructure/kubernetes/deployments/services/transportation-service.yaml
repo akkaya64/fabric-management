@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transportation-service
+  namespace: fabric
+  labels:
+    app: transportation-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: transportation-service
+  template:
+    metadata:
+      labels:
+        app: transportation-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8087"
+    spec:
+      containers:
+        - name: transportation-service
+          image: ${REGISTRY}/fabric-management/transportation-service:${VERSION}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8087
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: fabric-secrets
+                  key: postgres-host
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: fabric-secrets
+                  key: postgres-port
+            - name: POSTGRES_DB
+              value: "transportation_db"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: fabric-secrets
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fabric-secrets
+                  key: postgres-password
+            - name: KAFKA_SERVERS
+              valueFrom:
+                secretKeyRef:
+                  name: fabric-secrets
+                  key: kafka-servers
+            - name: EUREKA_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fabric-config
+                  key: eureka-server-url
+            - name: CONFIG_SERVER_ENABLED
+              value: "true"
+            - name: CONFIG_SERVER_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: fabric-config
+                  key: config-server-uri
+            - name: SERVER_PORT
+              value: "8087"
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+          readinessProbe:
+            httpGet:
+              path: /api/transportation/actuator/health/readiness
+              port: 8087
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /api/transportation/actuator/health/liveness
+              port: 8087
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: fabric-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transportation-service
+  namespace: fabric
+spec:
+  selector:
+    app: transportation-service
+  ports:
+    - port: 8087
+      targetPort: 8087
+  type: ClusterIP

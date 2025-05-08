@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: contact-service
-          image: ${REGISTRY}/fabric/contact-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/contact-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

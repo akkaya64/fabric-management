@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: address-service
-          image: ${REGISTRY}/fabric/address-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/address-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

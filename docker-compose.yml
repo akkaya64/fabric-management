@@ -254,7 +254,7 @@ services:
   auth-service:
     build:
       context: .  # Kök dizin
-      dockerfile: auth-service/Dockerfile
+      dockerfile: services/identity/services/identity/auth-service/Dockerfile
       args:
         SPRING_PROFILES_ACTIVE: dev
     environment:
@@ -295,7 +295,7 @@ services:
   user-service:
     build:
       context: .  # Kök dizin
-      dockerfile: java-services/user-service/Dockerfile
+      dockerfile: services/identity/user-service/Dockerfile
       args:
         SPRING_PROFILES_ACTIVE: dev
     environment:
@@ -334,7 +334,98 @@ services:
       retries: 3
       start_period: 60s
 
-  # Diğer servisler için de benzer yapılandırmayı ekleyebilirsiniz...
+  # Logistics services
+  shipping-service:
+    build:
+      context: ./services/logistics/shipping-service
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/fabric_shipping_db
+      - SPRING_DATASOURCE_USERNAME=fabric
+      - SPRING_DATASOURCE_PASSWORD=fabric123
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - LOGGING_PATTERN_CONSOLE=%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n
+      - LOGGING_LOGSTASH_ENABLED=true
+      - LOGGING_LOGSTASH_HOST=logstash
+      - LOGGING_LOGSTASH_PORT=5000
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info,prometheus
+      - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
+      - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=true
+      - MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED=true
+      - MANAGEMENT_HEALTH_READINESSSTATE_ENABLED=true
+    depends_on:
+      consul:
+        condition: service_healthy
+      zipkin:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      logstash:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - fabric-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  transportation-service:
+    build:
+      context: ./services/logistics/transportation-service
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=transportation_db
+      - POSTGRES_USER=fabric
+      - POSTGRES_PASSWORD=fabric123
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_ZIPKIN_BASE_URL=http://zipkin:9411
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
+      - KAFKA_SERVERS=kafka:9092
+      - SERVER_PORT=8087
+      - EUREKA_SERVER_URL=http://consul:8500/eureka/
+      - LOGGING_PATTERN_CONSOLE=%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n
+      - LOGGING_LOGSTASH_ENABLED=true
+      - LOGGING_LOGSTASH_HOST=logstash
+      - LOGGING_LOGSTASH_PORT=5000
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info,prometheus
+      - MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS=always
+      - MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED=true
+      - MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED=true
+      - MANAGEMENT_HEALTH_READINESSSTATE_ENABLED=true
+    depends_on:
+      consul:
+        condition: service_healthy
+      zipkin:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      logstash:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - fabric-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8087/api/transportation/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
 networks:
   fabric-network:

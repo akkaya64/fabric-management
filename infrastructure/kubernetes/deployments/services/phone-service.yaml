@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: phone-service
-          image: ${REGISTRY}/fabric/phone-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/phone-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

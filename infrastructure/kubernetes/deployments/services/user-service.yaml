@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: ${REGISTRY}/fabric/user-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/user-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: performance-service
-          image: ${REGISTRY}/fabric/performance-service:${VERSION}
+          image: ${REGISTRY}/fabric-management/performance-service:${VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
