@@ -1,4 +1,4 @@
-package com.fabric.finance_service;
+package com.fabric.finance;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

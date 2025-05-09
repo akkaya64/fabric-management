@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/notification/notification-service/notification-service.iml" filepath="$PROJECT_DIR$/services/notification/notification-service/notification-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/production/quality-control-service/quality-control-service.iml" filepath="$PROJECT_DIR$/services/production/quality-control-service/quality-control-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/logistics/shipping-service/shipping-service.iml" filepath="$PROJECT_DIR$/services/logistics/shipping-service/shipping-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/inventory/stock-service/stock-service.iml" filepath="$PROJECT_DIR$/services/inventory/stock-service/stock-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/logistics/transportation-service/transportation-service.iml" filepath="$PROJECT_DIR$/services/logistics/transportation-service/transportation-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/identity/user-service/user-service.iml" filepath="$PROJECT_DIR$/services/identity/user-service/user-service.iml" />
