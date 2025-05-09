@@ -1,4 +1,4 @@
-package com.fabric.finance_service;
+package com.fabric.finance;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

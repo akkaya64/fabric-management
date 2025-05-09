@@ -41,6 +41,15 @@
         <module name="notification-service" />
         <module name="yarn-service" />
       </profile>
+      <profile name="Annotation profile for shipping-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="shipping-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="17" />
@@ -65,6 +74,7 @@
       <module name="performance-service" target="17" />
       <module name="phone-service" target="17" />
       <module name="quality-control-service" target="17" />
+      <module name="shipping-service" target="17" />
       <module name="stock-service" target="17" />
       <module name="transportation-service" target="17" />
       <module name="user-service" target="17" />
@@ -96,6 +106,7 @@
       <module name="performance-service" options="-parameters" />
       <module name="phone-service" options="-parameters" />
       <module name="quality-control-service" options="-parameters" />
+      <module name="shipping-service" options="-parameters" />
       <module name="stock-service" options="-parameters" />
       <module name="transportation-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
