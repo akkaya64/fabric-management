@@ -10,7 +10,6 @@
         <module name="auth-service" />
         <module name="finance-service" />
         <module name="api-gateway" />
-        <module name="fabric-java-security" />
         <module name="user-service" />
         <module name="company-service" />
         <module name="employee-service" />
@@ -99,7 +98,7 @@
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="fabric-java-commons" options="-parameters" />
-      <module name="fabric-java-security" options="-parameters" />
+      <module name="fabric-java-security" options="-parameters -proc:none" />
       <module name="finance-service" options="-parameters" />
       <module name="mail-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
