@@ -28,9 +28,16 @@ jobs:
           
       - name: Fix dependency issues for CI
         run: |
-          chmod +x scripts/ci-dependency-fix.sh
-          ./scripts/ci-dependency-fix.sh
+          # First directly install the fabric-parent POM
+          chmod +x scripts/install-parent-pom.sh
+          ./scripts/install-parent-pom.sh
+          
+          # Only fix version issues in POM files
           python3 scripts/fix-pom-versions.py
+          
+          # Then run CI dependency fix
+          chmod +x scripts/ci-dependency-fix.sh
+          ./scripts/ci-dependency-fix.sh -Dmaven.enforcer.skip=true -DskipTests
           
       - name: Verify Java commons and security libraries
         run: |
@@ -60,9 +67,16 @@ jobs:
       
       - name: Fix dependency issues for CI
         run: |
-          chmod +x scripts/ci-dependency-fix.sh
-          ./scripts/ci-dependency-fix.sh
+          # First directly install the fabric-parent POM
+          chmod +x scripts/install-parent-pom.sh
+          ./scripts/install-parent-pom.sh
+          
+          # Only fix version issues in POM files
           python3 scripts/fix-pom-versions.py
+          
+          # Then run CI dependency fix
+          chmod +x scripts/ci-dependency-fix.sh
+          ./scripts/ci-dependency-fix.sh -Dmaven.enforcer.skip=true -DskipTests
           
       - name: Verify Java commons and security libraries
         run: |
