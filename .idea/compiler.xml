@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="auth-service" />
-        <module name="finance-service" />
         <module name="api-gateway" />
+        <module name="auth-service" />
         <module name="user-service" />
         <module name="company-service" />
+        <module name="finance-service" />
         <module name="employee-service" />
       </profile>
       <profile name="Annotation profile for Fabric Management" enabled="true">
@@ -23,7 +23,16 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for transportation-service" enabled="true">
+      <profile name="Annotation profile for fabric-java-security" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="fabric-java-security" />
+      </profile>
+      <profile name="Annotation profile for notification-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -31,32 +40,15 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="stock-service" />
-        <module name="transportation-service" />
         <module name="contact-service" />
+        <module name="transportation-service" />
         <module name="dyeing-finishing-service" />
         <module name="weaving-service" />
         <module name="warehouse-service" />
         <module name="quality-control-service" />
         <module name="notification-service" />
         <module name="yarn-service" />
-      </profile>
-      <profile name="Annotation profile for shipping-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
         <module name="shipping-service" />
-      </profile>
-      <profile name="Annotation profile for fabric-java-security" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
-        </processorPath>
-        <module name="fabric-java-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
