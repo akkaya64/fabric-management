@@ -24,6 +24,7 @@
         <owasp.version>8.2.1</owasp.version>
         <maven.enforcer.skip>true</maven.enforcer.skip>
         <lombok.version>1.18.30</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
     
     <dependencyManagement>
