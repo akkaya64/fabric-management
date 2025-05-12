@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class JwtProvider {
 
     @Value("${fabric.security.jwt.secret}")

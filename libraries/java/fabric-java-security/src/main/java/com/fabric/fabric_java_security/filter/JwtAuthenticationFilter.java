@@ -24,6 +24,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtProvider jwtProvider;
     private final UserDetailsService userDetailsService;
 
+    // Default constructor for auto-configuration
+    public JwtAuthenticationFilter() {
+        this.jwtProvider = null;
+        this.userDetailsService = null;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {

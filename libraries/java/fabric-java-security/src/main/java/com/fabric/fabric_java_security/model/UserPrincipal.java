@@ -1,7 +1,9 @@
 package com.fabric.fabric_java_security.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,13 +14,15 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserPrincipal implements UserDetails {
     private Long id;
     private String email;
     private String password;
     private Long companyId;
     private String companyType;
-    private final List<String> roles;
+    private List<String> roles;
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal create(Long id, String email, String password,

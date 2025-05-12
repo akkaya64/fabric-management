@@ -24,7 +24,7 @@ public class ApiResponse<T> {
     private T data;
 
     public static <T> ApiResponse<T> success(T data) {
-        return ApiResponse.<T>builder()
+        return (ApiResponse<T>) ApiResponse.builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
                 .data(data)
@@ -32,7 +32,7 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> success(String message, T data) {
-        return ApiResponse.<T>builder()
+        return (ApiResponse<T>) ApiResponse.builder()
                 .success(true)
                 .message(message)
                 .status(HttpStatus.OK.value())
@@ -41,7 +41,7 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> created(T data) {
-        return ApiResponse.<T>builder()
+        return (ApiResponse<T>) ApiResponse.builder()
                 .success(true)
                 .status(HttpStatus.CREATED.value())
                 .data(data)
@@ -49,7 +49,7 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> created(String message, T data) {
-        return ApiResponse.<T>builder()
+        return (ApiResponse<T>) ApiResponse.builder()
                 .success(true)
                 .message(message)
                 .status(HttpStatus.CREATED.value())
@@ -58,7 +58,7 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> error(HttpStatus httpStatus, String message) {
-        return ApiResponse.<T>builder()
+        return (ApiResponse<T>) ApiResponse.builder()
                 .success(false)
                 .status(httpStatus.value())
                 .error(httpStatus.getReasonPhrase())

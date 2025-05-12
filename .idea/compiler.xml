@@ -10,7 +10,6 @@
         <module name="auth-service" />
         <module name="finance-service" />
         <module name="api-gateway" />
-        <module name="fabric-java-security" />
         <module name="user-service" />
         <module name="company-service" />
         <module name="employee-service" />
@@ -49,6 +48,15 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="shipping-service" />
+      </profile>
+      <profile name="Annotation profile for fabric-java-security" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="fabric-java-security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
