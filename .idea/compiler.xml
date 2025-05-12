@@ -49,6 +49,15 @@
         </processorPath>
         <module name="shipping-service" />
       </profile>
+      <profile name="Annotation profile for fabric-java-security" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="fabric-java-security" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="17" />
@@ -98,7 +107,7 @@
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="fabric-java-commons" options="-parameters" />
-      <module name="fabric-java-security" options="-parameters -proc:none" />
+      <module name="fabric-java-security" options="-parameters" />
       <module name="finance-service" options="-parameters" />
       <module name="mail-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />

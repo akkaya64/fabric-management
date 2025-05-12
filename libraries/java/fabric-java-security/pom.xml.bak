@@ -110,9 +110,6 @@
 							<version>${lombok.version}</version>
 						</path>
 					</annotationProcessorPaths>
-					<compilerArgs>
-						<arg>-proc:none</arg>
-					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -127,6 +124,14 @@
 					</excludes>
 					<classifier>exec</classifier>
 					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<mainClass>com.fabric.fabric_java_security.model.ApiResponse</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -23,6 +23,11 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private final ObjectMapper objectMapper;
 
+    // Add default constructor for auto-configuration
+    public JwtAuthenticationEntryPoint() {
+        this.objectMapper = new ObjectMapper();
+    }
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {

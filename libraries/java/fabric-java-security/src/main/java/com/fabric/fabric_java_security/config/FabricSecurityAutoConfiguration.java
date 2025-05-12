@@ -20,8 +20,8 @@ public class FabricSecurityAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint(ObjectMapper objectMapper) {
-        return new JwtAuthenticationEntryPoint(objectMapper);
+    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint() {
+        return new JwtAuthenticationEntryPoint();
     }
 
     @Bean
