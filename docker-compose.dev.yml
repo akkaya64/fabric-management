@@ -157,8 +157,8 @@ services:
     container_name: fabric-logstash
     ports:
       - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
+      - "5001:5000/tcp"
+      - "5001:5000/udp"
       - "9600:9600"
     environment:
       - LS_JAVA_OPTS=-Xms256m -Xmx512m

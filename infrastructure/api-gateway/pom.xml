@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fabric</groupId>
 	<artifactId>api-gateway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>api-gateway</name>
 	<description>API Gateway for Fabric Management Platform, serving as a centralized entry point for all microservices. Routes incoming client requests to internal services like authentication, user management, and more, while handling cross-cutting concerns such as routing, security, and rate limiting.</description>
 	<url/>

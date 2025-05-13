@@ -9,7 +9,7 @@
 		<relativePath>../../../fabric-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>company-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>company-service</name>
 	<description>company-service for fabric management</description>
 	<dependencies>

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fabric</groupId>
 	<artifactId>quality-control-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>quality-control-service</name>
 	<description>Quality Control Service for Fabric Management</description>
 	<url/>

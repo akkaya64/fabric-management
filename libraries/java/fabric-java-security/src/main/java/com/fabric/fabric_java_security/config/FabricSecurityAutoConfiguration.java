@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "com.fabric.fabric_java_security")
 public class FabricSecurityAutoConfiguration {
-    // This class enables auto-configuration of security components when included as a dependency
+    // This class enables auto-configuration of security components
 }
