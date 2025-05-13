@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Disabled("Tests are disabled until proper test setup is completed")
+@Disabled("Tests are temporarily disabled")
 class FabricJavaSecurityApplicationTests {
 
     @Test
