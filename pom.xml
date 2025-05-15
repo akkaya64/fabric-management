@@ -19,14 +19,8 @@
 
     <modules>
         <module>fabric-parent</module>
-        <module>libraries/java/fabric-java-security</module>
-        <module>services/finance/finance-service</module>
-        <module>services/hr/employee-service</module>
         <module>services/identity/auth-service</module>
         <module>services/identity/user-service</module>
-        <module>services/organization/company-service</module>
-        <module>services/logistics/shipping-service</module>
-        <module>services/logistics/transportation-service</module>
     </modules>
 
     <build>
