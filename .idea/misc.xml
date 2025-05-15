@@ -34,6 +34,7 @@
         <option value="$PROJECT_DIR$/services/inventory/stock-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/inventory/warehouse-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/logistics/transportation-service/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/java/common/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -46,6 +47,7 @@
         <option value="$PROJECT_DIR$/java-services/mail-service/pom.xml" />
         <option value="$PROJECT_DIR$/java-services/performance-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/identity/authservice/pom.xml" />
+        <option value="$PROJECT_DIR$/services/identity/common/pom.xml" />
         <option value="$PROJECT_DIR$/services/organization/company/pom.xml" />
       </set>
     </option>
