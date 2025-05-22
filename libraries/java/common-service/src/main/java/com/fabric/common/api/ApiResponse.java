@@ -1,13 +1,12 @@
 package com.fabric.common.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 
 @Data
-@SuperBuilder(toBuilder = true, access = AccessLevel.PUBLIC)
+@SuperBuilder(toBuilder = true)
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
