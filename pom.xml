@@ -14,21 +14,23 @@
 
     <properties>
         <!-- Java & Spring Boot -->
-        <java.version>17</java.version>
-        <spring.boot.version>3.1.0</spring.boot.version>
+        <java.version>21</java.version>
+        <spring.boot.version>3.2.1</spring.boot.version>
 
         <!-- Spring Cloud BOM -->
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
 
         <!-- Shared library versions -->
-        <lombok.version>1.18.26</lombok.version>
-        <springdoc.version>2.2.0</springdoc.version>
-        <testcontainers.version>1.18.3</testcontainers.version>
+        <lombok.version>1.18.30</lombok.version>
+        <springdoc.version>2.3.0</springdoc.version>
+        <testcontainers.version>1.19.3</testcontainers.version>
 
         <!-- Plugin versions -->
         <maven.enforcer.plugin.version>3.4.1</maven.enforcer.plugin.version>
-        <jacoco.plugin.version>0.8.10</jacoco.plugin.version>
-        <versions.plugin.version>2.16.0</versions.plugin.version>
+        <jacoco.plugin.version>0.8.11</jacoco.plugin.version>
+        <versions.plugin.version>2.16.2</versions.plugin.version>
+        <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.2.3</maven.surefire.plugin.version>
     </properties>
 
     <modules>
