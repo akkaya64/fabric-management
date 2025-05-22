@@ -25,3 +25,4 @@ public class BusinessException extends RuntimeException {
         this.code = code;
         this.status = HttpStatus.BAD_REQUEST;
     }
+}
