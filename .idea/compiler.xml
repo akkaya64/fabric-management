@@ -11,7 +11,6 @@
         <module name="auth-service" />
         <module name="user-service" />
         <module name="company-service" />
-        <module name="common" />
         <module name="finance-service" />
       </profile>
       <profile name="Annotation profile for Fabric Management" enabled="true">
@@ -23,12 +22,12 @@
         </processorPath>
         <module name="base-person-service" />
       </profile>
-      <profile name="Annotation profile for common" enabled="true">
+      <profile name="Annotation profile for Common Service Library" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
         </processorPath>
         <module name="stock-service" />
@@ -41,14 +40,34 @@
         <module name="notification-service" />
         <module name="yarn-service" />
       </profile>
+      <profile name="Annotation profile for security-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="security-service" />
+      </profile>
+      <profile name="Annotation profile for common-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/${spring-boot.version}/spring-boot-configuration-processor-${spring-boot.version}.jar" />
+        </processorPath>
+        <module name="common-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="17" />
       <module name="apigateway" target="17" />
-      <module name="auth-service" target="17" />
+      <module name="auth-service" target="1.5" />
       <module name="authservice" target="17" />
       <module name="base-person-service" target="17" />
       <module name="common" target="17" />
+      <module name="common-service" target="19" />
       <module name="company" target="17" />
       <module name="company-service" target="17" />
       <module name="contact-service" target="17" />
@@ -66,6 +85,7 @@
       <module name="performance-service" target="17" />
       <module name="phone-service" target="17" />
       <module name="quality-control-service" target="17" />
+      <module name="security-service" target="17" />
       <module name="shipping-service" target="17" />
       <module name="stock-service" target="17" />
       <module name="transportation-service" target="17" />
@@ -80,10 +100,11 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="apigateway" options="-parameters" />
-      <module name="auth-service" options="-parameters" />
+      <module name="auth-service" options="" />
       <module name="authservice" options="-parameters" />
       <module name="base-person-service" options="-parameters" />
       <module name="common" options="" />
+      <module name="common-service" options="" />
       <module name="company" options="-parameters" />
       <module name="company-service" options="-parameters" />
       <module name="contact-service" options="-parameters" />

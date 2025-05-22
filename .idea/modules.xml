@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/infrastructure/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/infrastructure/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/services/identity/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" filepath="$PROJECT_DIR$/domains/hr/base-person-service/base-person-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/java/common/common.iml" filepath="$PROJECT_DIR$/libraries/java/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/java/common-service/common-service.iml" filepath="$PROJECT_DIR$/libraries/java/common-service/common-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/organization/company-service/company-service.iml" filepath="$PROJECT_DIR$/services/organization/company-service/company-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/contact/contact-service/contact-service.iml" filepath="$PROJECT_DIR$/services/contact/contact-service/contact-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/production/dyeing-finishing-service/dyeing-finishing-service.iml" filepath="$PROJECT_DIR$/services/production/dyeing-finishing-service/dyeing-finishing-service.iml" />
@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" filepath="$PROJECT_DIR$/services/finance/finance-service/finance-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/notification/notification-service/notification-service.iml" filepath="$PROJECT_DIR$/services/notification/notification-service/notification-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/production/quality-control-service/quality-control-service.iml" filepath="$PROJECT_DIR$/services/production/quality-control-service/quality-control-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/java/security-service/security-service.iml" filepath="$PROJECT_DIR$/libraries/java/security-service/security-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/inventory/stock-service/stock-service.iml" filepath="$PROJECT_DIR$/services/inventory/stock-service/stock-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/logistics/transportation-service/transportation-service.iml" filepath="$PROJECT_DIR$/services/logistics/transportation-service/transportation-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/identity/user-service/user-service.iml" filepath="$PROJECT_DIR$/services/identity/user-service/user-service.iml" />
