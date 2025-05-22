@@ -2,6 +2,7 @@ package com.fabric.common.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
@@ -10,7 +11,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Data
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, access = AccessLevel.PUBLIC)
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {

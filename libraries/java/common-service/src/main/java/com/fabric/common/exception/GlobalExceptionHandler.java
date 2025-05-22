@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -45,16 +43,16 @@ public class GlobalExceptionHandler {
                 .map(this::mapFieldError)
                 .collect(Collectors.toList());
 
-        ApiError apiError = new ApiError(
-                ErrorCodes.VALIDATION_ERROR,
-                ErrorMessages.VALIDATION_FAILED,
-                Instant.now(),
-                validationErrors,
-                requestId
-        );
+        ApiError apiError = ApiError.builder()
+                .code(ErrorCodes.VALIDATION_ERROR)
+                .message(ErrorMessages.VALIDATION_FAILED)
+                .timestamp(Instant.now())
+                .validationErrors(validationErrors)
+                .requestId(requestId)
+                .build();
 
         return ResponseEntity.badRequest()
-                .body(new ApiResponse<>(false, null, apiError));
+                .body(ApiResponse.error(apiError));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -69,16 +67,16 @@ public class GlobalExceptionHandler {
                 .map(this::mapConstraintViolation)
                 .collect(Collectors.toList());
 
-        ApiError apiError = new ApiError(
-                ErrorCodes.VALIDATION_ERROR,
-                ErrorMessages.CONSTRAINT_VALIDATION_FAILED,
-                Instant.now(),
-                validationErrors,
-                requestId
-        );
+        ApiError apiError = ApiError.builder()
+                .code(ErrorCodes.VALIDATION_ERROR)
+                .message(ErrorMessages.CONSTRAINT_VALIDATION_FAILED)
+                .timestamp(Instant.now())
+                .validationErrors(validationErrors)
+                .requestId(requestId)
+                .build();
 
         return ResponseEntity.badRequest()
-                .body(new ApiResponse<>(false, null, apiError));
+                .body(ApiResponse.error(apiError));
     }
 
     @ExceptionHandler(BusinessException.class)
@@ -88,15 +86,15 @@ public class GlobalExceptionHandler {
         String requestId = generateRequestId();
         log.warn("Business exception occurred. RequestId: {}, Code: {}", requestId, ex.getCode(), ex);
 
-        ApiError apiError = new ApiError(
-                ex.getCode(),
-                ex.getMessage(),
-                Instant.now(),
-                requestId
-        );
+        ApiError apiError = ApiError.builder()
+                .code(ex.getCode())
+                .message(ex.getMessage())
+                .timestamp(Instant.now())
+                .requestId(requestId)
+                .build();
 
         return ResponseEntity.status(ex.getStatus())
-                .body(new ApiResponse<>(false, null, apiError));
+                .body(ApiResponse.error(apiError));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -106,15 +104,15 @@ public class GlobalExceptionHandler {
         String requestId = generateRequestId();
         log.warn("Resource not found. RequestId: {}", requestId, ex);
 
-        ApiError apiError = new ApiError(
-                ErrorCodes.NOT_FOUND,
-                ex.getMessage(),
-                Instant.now(),
-                requestId
-        );
+        ApiError apiError = ApiError.builder()
+                .code(ErrorCodes.NOT_FOUND)
+                .message(ex.getMessage())
+                .timestamp(Instant.now())
+                .requestId(requestId)
+                .build();
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiResponse<>(false, null, apiError));
+                .body(ApiResponse.error(apiError));
     }
 
     @ExceptionHandler(Exception.class)
@@ -124,19 +122,19 @@ public class GlobalExceptionHandler {
         String requestId = generateRequestId();
         log.error("Unexpected error occurred. RequestId: {}", requestId, ex);
 
-        ApiError apiError = new ApiError(
-                ErrorCodes.INTERNAL_SERVER_ERROR,
-                ErrorMessages.INTERNAL_SERVER_ERROR,
-                Instant.now(),
-                requestId
-        );
+        ApiError apiError = ApiError.builder()
+                .code(ErrorCodes.INTERNAL_SERVER_ERROR)
+                .message(ErrorMessages.INTERNAL_SERVER_ERROR)
+                .timestamp(Instant.now())
+                .requestId(requestId)
+                .build();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ApiResponse<>(false, null, apiError));
+                .body(ApiResponse.error(apiError));
     }
 
     private ValidationError mapFieldError(FieldError fieldError) {
-        return new ValidationError(
+        return ValidationError.of(
                 fieldError.getField(),
                 fieldError.getDefaultMessage(),
                 fieldError.getRejectedValue()
@@ -144,7 +142,7 @@ public class GlobalExceptionHandler {
     }
 
     private ValidationError mapConstraintViolation(ConstraintViolation<?> violation) {
-        return new ValidationError(
+        return ValidationError.of(
                 violation.getPropertyPath().toString(),
                 violation.getMessage(),
                 violation.getInvalidValue()
