@@ -2,7 +2,7 @@ package com.fabric.common.util.messages;
 
 public class SuccessMessages {
     private SuccessMessages() {
-        // Utility class - instantiation'a izin verme
+        // Utility class - prevent instantiation
     }
 
     // Generic Success Messages

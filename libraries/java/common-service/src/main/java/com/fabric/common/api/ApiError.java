@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {

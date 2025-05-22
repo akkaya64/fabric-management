@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Controller katmanında ortak dönüş metodlarını sağlar.
- * Mesajlar merkezi olarak ErrorMessages ve SuccessMessages sınıflarından alınır.
+ * Provides common response methods for the controller layer.
+ * Messages are centrally managed through ErrorMessages and SuccessMessages classes.
  */
 public abstract class BaseController {
 

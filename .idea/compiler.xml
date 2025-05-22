@@ -67,7 +67,7 @@
       <module name="authservice" target="17" />
       <module name="base-person-service" target="17" />
       <module name="common" target="17" />
-      <module name="common-service" target="17" />
+      <module name="common-service" target="19" />
       <module name="company" target="17" />
       <module name="company-service" target="17" />
       <module name="contact-service" target="17" />

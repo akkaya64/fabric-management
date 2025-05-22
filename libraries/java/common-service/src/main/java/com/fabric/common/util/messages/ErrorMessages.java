@@ -2,7 +2,7 @@ package com.fabric.common.util.messages;
 
 public class ErrorMessages {
     private ErrorMessages() {
-        // Utility class - instantiation'a izin verme
+        // Utility class - prevent instantiation
     }
 
     // Generic Error Messages
