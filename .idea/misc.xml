@@ -35,6 +35,8 @@
         <option value="$PROJECT_DIR$/services/inventory/warehouse-service/pom.xml" />
         <option value="$PROJECT_DIR$/services/logistics/transportation-service/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/java/common/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/java/common-service/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/java/security-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

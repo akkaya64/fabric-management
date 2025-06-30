@@ -1,0 +1,17 @@
+fabric:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:defaultSecretKeyForDevelopmentOnlyDoNotUseInProduction}
+      access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:86400000} # 24 hours
+      refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:604800000} # 7 days
+      issuer: ${JWT_ISSUER:fabric-management}
+      audience: ${JWT_AUDIENCE:fabric-users}
+      enable-refresh-token: ${JWT_ENABLE_REFRESH_TOKEN:true}
+      algorithm: ${JWT_ALGORITHM:HS256}
+      use-rsa-keys: ${JWT_USE_RSA_KEYS:false}
+      public-key-path: ${JWT_PUBLIC_KEY_PATH:}
+      private-key-path: ${JWT_PRIVATE_KEY_PATH:}
+
+logging:
+  level:
+    com.fabric.security: DEBUG
